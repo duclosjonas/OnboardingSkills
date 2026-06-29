@@ -5,12 +5,6 @@ En une commande, installe les skills nécessaires et guide le collaborateur à t
 
 ---
 
-## Ouvrir un terminal sur Mac
-
-Appuie sur `Cmd + Espace`, tape **Terminal**, appuie sur Entrée.
-
----
-
 ## Prérequis
 
 - Mac
@@ -21,7 +15,7 @@ Appuie sur `Cmd + Espace`, tape **Terminal**, appuie sur Entrée.
 
 ## Installation
 
-Dans ton terminal, colle cette commande :
+Ouvre un terminal (Cmd + Espace → "Terminal" → Entrée) et colle cette commande :
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/duclosjonas/OnboardingSkills/main/install.sh | bash
@@ -35,9 +29,8 @@ C'est tout. Le script installe les skills au bon endroit automatiquement.
 
 Une fois l'installation terminée :
 
-1. Ouvre un terminal (Cmd + Espace → "Terminal" → Entrée)
-2. Lance OpenCode : `opencode`
-3. Dans OpenCode, tape ce prompt :
+1. Ouvre OpenCode
+2. Tape ce prompt :
 
 ```
 use skill collaborator-onboarding
