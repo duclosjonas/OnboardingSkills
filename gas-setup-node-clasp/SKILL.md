@@ -20,125 +20,40 @@ Objectif final : `clasp push` fonctionne depuis le terminal et envoie le code ve
 
 ---
 
-## PHASE 0 — Prérequis macOS : Xcode Command Line Tools
+## PHASE 1 — Installation automatique Node.js + clasp
 
-> "Avant d'installer nvm, on a besoin des outils de compilation macOS. C'est un paquet Apple installé une fois par machine — rien à voir avec l'IDE Xcode complet."
+> "Un script fait tout automatiquement : détection Xcode, nvm, Node.js LTS, clasp. Lance une seule commande et suis les instructions."
 
-### Étape 0.1 — Vérifier si déjà installé
-
-```bash
-xcode-select -p
-```
-
-- Si la commande retourne un chemin (ex: `/Library/Developer/CommandLineTools`) → déjà installé, passer directement à la Phase 1.
-- Si la commande retourne une erreur → procéder à l'installation.
-
-### Étape 0.2 — Installer les outils si absents
+### Étape 1.1 — Lancer le script d'installation
 
 ```bash
-xcode-select --install
+curl -fsSL https://raw.githubusercontent.com/duclosjonas/OnboardingSkills/main/setup.sh | bash
 ```
 
-Une fenêtre macOS va s'ouvrir et proposer d'installer les outils. Cliquer sur "Installer" et attendre la fin — cela peut prendre 5 à 10 minutes selon la connexion.
+Le script gère tout dans l'ordre :
+- Vérifie si Xcode Command Line Tools est installé
+- Installe nvm si absent
+- Installe Node.js LTS
+- Installe clasp globalement
+- Configure `~/.zshrc` pour la persistance
 
-### Étape 0.3 — Vérifier l'installation
+**Si le script s'arrête avec ce message :**
+```
+⚠️ Xcode Command Line Tools manquant.
+Lance cette commande : xcode-select --install
+```
+→ Lancer `xcode-select --install` dans le terminal. Une fenêtre macOS s'ouvre — cliquer sur **"Installer"** (pas "Obtenir Xcode"). Attendre 5-10 minutes, puis relancer le script.
 
-```bash
-xcode-select -p
+**Résultat attendu en fin de script :**
+```
+✅ Xcode Command Line Tools détecté
+✅ nvm x.x.x
+✅ Node.js vxx.x.x
+✅ npm xx.x.x
+✅ clasp x.x.x
 ```
 
-Résultat attendu : un chemin valide. Si la commande échoue encore, ne pas continuer et demander le message d'erreur exact.
-
----
-
-## PHASE 1 — Installer Node.js via nvm
-
-> "On va installer Node.js via nvm (Node Version Manager). Cela permet de gérer plusieurs versions de Node sur le même Mac sans conflit."
-
-### Étape 1.1 — Installer nvm
-
-Demander d'exécuter cette commande dans le Terminal :
-
-```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-```
-
-> "Cette commande télécharge et installe nvm. Elle va modifier ton fichier `~/.zshrc` pour que nvm soit disponible à chaque ouverture du Terminal."
-
-Attendre la confirmation que la commande s'est terminée sans erreur.
-
-### Étape 1.2 — Recharger le Terminal
-
-```bash
-source ~/.zshrc
-```
-
-> "On recharge la configuration du Terminal pour que nvm soit immédiatement disponible sans avoir à fermer et rouvrir le Terminal."
-
-### Étape 1.3 — Vérifier nvm
-
-```bash
-nvm --version
-```
-
-Résultat attendu : un numéro de version (ex: `0.39.7`).
-
-Si la commande retourne `command not found` : demander le contenu de `~/.zshrc` et vérifier que les lignes nvm sont présentes à la fin.
-
-### Étape 1.4 — Installer Node.js LTS
-
-```bash
-nvm install --lts
-```
-
-> "On installe la version LTS (Long Term Support) de Node.js — la plus stable et recommandée pour les outils de développement."
-
-Attendre la fin de l'installation.
-
-### Étape 1.5 — Vérifier Node.js et npm
-
-```bash
-node -v
-npm -v
-```
-
-Résultats attendus : deux numéros de version (ex: `v20.x.x` et `10.x.x`).
-
-Si l'un ou l'autre échoue : ne pas continuer, demander le message d'erreur.
-
----
-
-## PHASE 2 — Installer clasp
-
-> "clasp (Command Line Apps Script) est l'outil officiel de Google pour pousser du code depuis ton Mac vers Apps Script sans passer par l'interface web."
-
-### Étape 2.1 — Installer clasp globalement
-
-```bash
-npm install -g @google/clasp
-```
-
-> "L'option `-g` installe clasp pour l'ensemble du Mac, pas seulement pour un projet — il sera disponible dans tous tes dossiers."
-
-### Étape 2.2 — Vérifier clasp
-
-```bash
-clasp -v
-```
-
-Résultat attendu : un numéro de version (ex: `2.4.x`).
-
-**Erreur courante — `clasp: command not found` après l'install :**
-> "C'est souvent un problème de PATH avec nvm. Essaie :"
-```bash
-npm config get prefix
-```
-Si le chemin ne contient pas `nvm`, exécuter :
-```bash
-nvm use --lts
-npm install -g @google/clasp
-```
-Puis retenter `clasp -v`.
+Si une étape échoue : partager le message d'erreur exact affiché.
 
 ---
 
