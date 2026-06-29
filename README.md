@@ -36,26 +36,84 @@ Une fois l'installation terminée :
 use skill collaborator-onboarding
 ```
 
-L'agent prend le relais et enchaîne les 4 phases :
-
-| Phase | Ce qui se passe | Output |
-|---|---|---|
-| 1 — Profil | 6 questions sur ta façon de travailler | `~/.config/opencode/AGENTS.md` — ton profil personnel chargé sur tous tes projets |
-| 2 — Installation | Node.js (via nvm) + clasp + login Google OAuth | Environnement de développement GAS opérationnel |
-| 3 — Projet | 3 questions sur ton projet | `projet/AGENTS.md` — configuration spécifique au projet |
-| 4 — Skills | Installation des skills de sécurisation | `gas-reviewer`, `gas-impact-analyzer`, `gas-regression-checker` liés au projet |
+L'agent prend le relais et enchaîne les 4 phases dans l'ordre.
 
 ---
 
-## Skills inclus
+## Ce qui se passe phase par phase
+
+### Phase 1 — Profil de travail
+
+L'agent te pose 6 questions, une par une :
+- Ta langue de travail avec un agent IA
+- Ce qui t'irrite dans les réponses d'un agent (trop long, trop servile, ne challenge pas...)
+- Ta préférence de posture : agent qui exécute, ou agent qui challenge si la demande est bancale
+- Longueur des réponses souhaitée par défaut
+- Tes sujets maîtrisés vs ceux sur lesquels tu veux qu'il explique les bases
+- Ton mode de validation : agir directement sur les tâches courtes, ou toujours confirmer avant
+
+À partir de tes réponses, l'agent génère un fichier `~/.config/opencode/AGENTS.md` — ton profil personnel. Ce fichier est automatiquement chargé sur tous tes projets OpenCode : il calibre la posture, le format et le comportement de l'agent pour toutes tes conversations futures.
+
+L'agent te montre le fichier généré et attend ta validation avant de l'écrire.
+
+---
+
+### Phase 2 — Installation de l'environnement de développement
+
+L'agent installe automatiquement :
+- **nvm** — gestionnaire de versions Node.js
+- **Node.js LTS** — via nvm
+- **clasp** — l'outil en ligne de commande pour pousser du code vers Google Apps Script
+
+Il te guide ensuite pour te connecter à ton compte Google via OAuth, ce qui permet à clasp d'accéder à tes projets Apps Script.
+
+---
+
+### Phase 3 — Configuration du projet
+
+L'agent te pose 3 questions sur ton projet :
+- Projet existant ou nouveau ?
+- Stack technique (Google Apps Script, Node.js, Python, autre)
+- Nom et description courte du projet
+
+Selon tes réponses, il choisit le bon chemin :
+
+**Projet GAS existant** — l'agent audite tous tes fichiers `.gs` et `.html`, identifie les patterns, les dépendances et les risques, puis génère les fichiers de gouvernance du projet :
+- `AGENTS.md` — architecture, conventions de code, patterns récurrents, fichiers clés
+- `TODO.md` — registre des bugs, améliorations et tâches identifiés pendant l'audit
+- `TESTS.md` — parcours critiques à tester manuellement avant chaque push
+- `CHANGELOG.md` — historique des modifications
+
+**Projet GAS nouveau** — l'agent t'interview sur le besoin, crée la structure de dossiers locale et génère un template `00_Config.gs` prêt à l'emploi, puis te guide pour créer le projet dans Apps Script.
+
+**Autre stack** — l'agent génère un `AGENTS.md` minimal adapté à la technologie.
+
+---
+
+### Phase 4 — Installation des skills de sécurisation
+
+Pour les projets GAS, l'agent installe et lie au projet les 3 skills de sécurisation :
 
 | Skill | Rôle |
 |---|---|
-| `collaborator-onboarding` | Onboarding complet — ce que tu viens d'utiliser |
-| `gas-reviewer` | Review automatique des fichiers GAS avant push — détecte les issues critiques |
-| `gas-impact-analyzer` | Analyse l'impact d'une modification avant de coder — classifie LOW / MEDIUM / HIGH |
-| `gas-regression-checker` | Liste les tests manuels à effectuer après chaque modification |
-| `gas-setup-node-clasp` | Installation Node.js + clasp + login OAuth (invoqué par l'onboarding) |
+| `gas-reviewer` | Review automatique des fichiers GAS avant push — détecte les issues critiques, bloquantes ou à surveiller |
+| `gas-impact-analyzer` | Analyse l'impact d'une modification avant de coder — classifie LOW / MEDIUM / HIGH et bloque si nécessaire |
+| `gas-regression-checker` | Après chaque modification, liste les tests manuels à effectuer avant de pousser en production |
+
+Ces skills sont disponibles dans OpenCode pour toutes les sessions futures sur ce projet.
+
+---
+
+## Ce que tu obtiens à la fin
+
+```
+~/.config/opencode/AGENTS.md       — ton profil personnel (tous projets)
+[projet]/AGENTS.md                 — gouvernance du projet
+[projet]/TODO.md                   — registre des travaux identifiés
+[projet]/TESTS.md                  — parcours de tests critiques
+[projet]/CHANGELOG.md              — historique
+[projet]/.opencode/skills/         — gas-reviewer, gas-impact-analyzer, gas-regression-checker
+```
 
 ---
 
