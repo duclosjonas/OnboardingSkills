@@ -45,7 +45,7 @@ L'agent prend le relais et enchaîne les 4 phases dans l'ordre.
 ### Phase 1 — Profil de travail
 
 L'agent te pose 6 questions, une par une :
-- Ta langue de travail avec un agent IA
+- La langue dans laquelle tu veux que l'agent te réponde (français, anglais, autre)
 - Ce qui t'irrite dans les réponses d'un agent (trop long, trop servile, ne challenge pas...)
 - Ta préférence de posture : agent qui exécute, ou agent qui challenge si la demande est bancale
 - Longueur des réponses souhaitée par défaut
@@ -61,9 +61,9 @@ L'agent te montre le fichier généré et attend ta validation avant de l'écrir
 ### Phase 2 — Installation de l'environnement de développement
 
 L'agent installe automatiquement :
-- **nvm** — gestionnaire de versions Node.js
-- **Node.js LTS** — via nvm
-- **clasp** — l'outil en ligne de commande pour pousser du code vers Google Apps Script
+- **nvm** — outil qui permet d'installer et de gérer plusieurs versions de Node.js sur ton Mac
+- **Node.js LTS** — l'environnement d'exécution JavaScript nécessaire pour faire tourner clasp
+- **clasp** — l'outil qui permet de pousser ton code depuis ton Mac vers Google Apps Script, sans passer par l'éditeur en ligne
 
 Il te guide ensuite pour te connecter à ton compte Google via OAuth, ce qui permet à clasp d'accéder à tes projets Apps Script.
 
