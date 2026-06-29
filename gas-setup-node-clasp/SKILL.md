@@ -20,6 +20,37 @@ Objectif final : `clasp push` fonctionne depuis le terminal et envoie le code ve
 
 ---
 
+## PHASE 0 — Prérequis macOS : Xcode Command Line Tools
+
+> "Avant d'installer nvm, on a besoin des outils de compilation macOS. C'est un paquet Apple installé une fois par machine — rien à voir avec l'IDE Xcode complet."
+
+### Étape 0.1 — Vérifier si déjà installé
+
+```bash
+xcode-select -p
+```
+
+- Si la commande retourne un chemin (ex: `/Library/Developer/CommandLineTools`) → déjà installé, passer directement à la Phase 1.
+- Si la commande retourne une erreur → procéder à l'installation.
+
+### Étape 0.2 — Installer les outils si absents
+
+```bash
+xcode-select --install
+```
+
+Une fenêtre macOS va s'ouvrir et proposer d'installer les outils. Cliquer sur "Installer" et attendre la fin — cela peut prendre 5 à 10 minutes selon la connexion.
+
+### Étape 0.3 — Vérifier l'installation
+
+```bash
+xcode-select -p
+```
+
+Résultat attendu : un chemin valide. Si la commande échoue encore, ne pas continuer et demander le message d'erreur exact.
+
+---
+
 ## PHASE 1 — Installer Node.js via nvm
 
 > "On va installer Node.js via nvm (Node Version Manager). Cela permet de gérer plusieurs versions de Node sur le même Mac sans conflit."
