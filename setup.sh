@@ -15,8 +15,9 @@ if ! xcode-select -p &>/dev/null; then
   echo "Lance cette commande dans ton terminal :"
   echo "  xcode-select --install"
   echo ""
-  echo "Une fenêtre macOS va s'ouvrir — clique sur 'Installer' (pas 'Obtenir Xcode')."
-  echo "Attends la fin du téléchargement (~5-10 min), puis relance ce script."
+  echo "→ Une fenêtre macOS s'ouvre — clique sur 'Installer' (pas 'Obtenir Xcode')"
+  echo "→ Attends la fin du téléchargement (entre 10 et 40 min selon ta connexion)"
+  echo "→ Une fois terminé, relance ce script"
   echo ""
   exit 0
 fi

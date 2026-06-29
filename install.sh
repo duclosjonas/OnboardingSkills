@@ -5,6 +5,23 @@
 
 set -e
 
+# --- Prérequis macOS : Xcode Command Line Tools ---
+if ! xcode-select -p &>/dev/null; then
+  echo ""
+  echo "⚠️  Étape préalable requise avant de continuer."
+  echo ""
+  echo "Les outils de compilation macOS ne sont pas installés sur ce Mac."
+  echo "Lance cette commande dans ton terminal :"
+  echo ""
+  echo "  xcode-select --install"
+  echo ""
+  echo "→ Une fenêtre macOS s'ouvre — clique sur 'Installer' (pas 'Obtenir Xcode')"
+  echo "→ Attends la fin du téléchargement (entre 10 et 40 min selon ta connexion)"
+  echo "→ Une fois terminé, relance ce script"
+  echo ""
+  exit 0
+fi
+
 REPO_URL="https://raw.githubusercontent.com/duclosjonas/OnboardingSkills/main"
 SKILLS_DIR="$HOME/.config/opencode/skills"
 
