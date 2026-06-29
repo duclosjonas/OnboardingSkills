@@ -1,3 +1,8 @@
+---
+name: collaborator-onboarding
+description: Use when a new collaborator starts with OpenCode. Guides through 4 phases in order: work profile interview (generates ~/.config/opencode/AGENTS.md), Node.js and clasp installation, project setup (existing or new, GAS or other stack), and security skills installation (gas-reviewer, gas-impact-analyzer, gas-regression-checker).
+---
+
 # Skill — Collaborator Onboarding
 
 ## Description
