@@ -17,7 +17,7 @@ Il explique ce qu'est Apps Script, ce qu'il peut faire, comment fonctionne le d�
 
 ## Prérequis
 
-Avoir fait l'onboarding OpenCode via l'équipe Transfo. C'est tout — OpenCode est déjà installé sur ton Mac.
+Avoir fait l'onboarding OpenCode via l'équipe Gen IA. C'est tout — OpenCode est déjà installé sur ton Mac.
 
 ---
 
