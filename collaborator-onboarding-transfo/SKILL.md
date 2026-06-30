@@ -99,8 +99,28 @@ Ne poser Q7 que si la réponse à Q2 est vague ou trop courte pour alimenter le 
 </jamais>
 ```
 
+Ajouter à la fin du fichier généré, avant d'écrire :
+
+```
+first_session: true
+```
+
 Affiche le fichier généré et demande confirmation avant d'écrire.
 Si le fichier `~/.config/opencode/AGENTS.md` existe déjà, le signaler et demander s'il faut écraser ou fusionner.
+
+Après confirmation et écriture du fichier, activer le mode Plan par défaut :
+
+```bash
+mkdir -p ~/.config/opencode && node -e "
+const fs = require('fs');
+const path = '${HOME}/.config/opencode/config.json';
+const config = fs.existsSync(path) ? JSON.parse(fs.readFileSync(path, 'utf8')) : {};
+config.mode = 'plan';
+fs.writeFileSync(path, JSON.stringify(config, null, 2));
+"
+```
+
+Confirmer : "Le mode Plan est activé par défaut — tu devras valider chaque action avant qu'elle soit exécutée."
 
 ---
 
@@ -215,9 +235,10 @@ Ton environnement est prêt.
 ✅ Node.js et clasp sont installés — tu peux pousser ton code vers Apps Script depuis ton Mac
 ✅ Ton projet est configuré — l'agent connaît son architecture et ses règles
 ✅ Les outils de sécurité sont connectés — l'agent vérifie le code avant chaque modification importante
+✅ Mode Plan activé — tu valides chaque action avant qu'elle soit exécutée
 
-Pour pousser du code vers Apps Script à l'avenir, une seule commande depuis ton dossier projet :
-  clasp push
+Avant ta première session de travail, lis ce guide (2 minutes) :
+→ https://grimoire.valiuz.io/fr/docs/ai/vibecoding/concepts/opencode-guide/
 
-Si tu as un doute, tu peux toujours me demander.
+Il explique comment bien travailler avec l'agent : sessions, prompts, choix du modèle.
 ```

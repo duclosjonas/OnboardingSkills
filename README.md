@@ -5,6 +5,14 @@ En une commande, installe les skills nécessaires et guide le collaborateur à t
 
 ---
 
+## Guide d'utilisation
+
+Avant ta première session de travail, lis ce guide (2 minutes) — il explique comment bien travailler avec l'agent : sessions, prompts, choix du modèle :
+
+**[Bien travailler avec OpenCode](https://grimoire.valiuz.io/fr/docs/ai/vibecoding/concepts/opencode-guide/)**
+
+---
+
 ## Avant de commencer
 
 Si tu n'es pas familier avec Google Apps Script, lis ce document avant de te lancer :
