@@ -7,9 +7,7 @@ En une commande, installe les skills nécessaires et guide le collaborateur à t
 
 ## Prérequis
 
-- Mac
-- [OpenCode](https://opencode.ai) installé
-- Connexion internet
+Avoir fait l'onboarding OpenCode via l'équipe Gen IA. C'est tout — OpenCode est déjà installé sur ton Mac.
 
 ---
 
@@ -44,12 +42,13 @@ L'agent prend le relais et enchaîne les 4 phases dans l'ordre.
 
 ### Phase 1 — Profil de travail
 
-L'agent te pose 6 questions, une par une :
+L'agent te pose quelques questions, une par une :
+- Ton prénom
 - La langue dans laquelle tu veux que l'agent te réponde (français, anglais, autre)
 - Ce qui t'irrite dans les réponses d'un agent (trop long, trop servile, ne challenge pas...)
 - Ta préférence de posture : agent qui exécute, ou agent qui challenge si la demande est bancale
 - Longueur des réponses souhaitée par défaut
-- Tes sujets maîtrisés vs ceux sur lesquels tu veux qu'il explique les bases
+- Ton métier et ce qui t'a amené à utiliser OpenCode
 - Ton mode de validation : agir directement sur les tâches courtes, ou toujours confirmer avant
 
 À partir de tes réponses, l'agent génère un fichier `~/.config/opencode/AGENTS.md` — ton profil personnel. Ce fichier est automatiquement chargé sur tous tes projets OpenCode : il calibre la posture, le format et le comportement de l'agent pour toutes tes conversations futures.
@@ -75,7 +74,7 @@ Il te guide ensuite pour te connecter à ton compte Google via OAuth, ce qui per
 
 L'agent te pose 3 questions sur ton projet :
 - Projet existant ou nouveau ?
-- Stack technique (Google Apps Script, Node.js, Python, autre)
+- Tu travailles dans Google Workspace (Sheets, Docs, Forms...) ou autre chose ?
 - Nom et description courte du projet
 
 Selon tes réponses, il choisit le bon chemin :
