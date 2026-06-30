@@ -10,7 +10,6 @@ En une commande, installe les skills nécessaires et guide le collaborateur à t
 - Mac
 - [OpenCode](https://opencode.ai) installé
 - Connexion internet
-- Xcode Command Line Tools (`xcode-select --install` dans le terminal)
 
 ---
 
@@ -61,7 +60,9 @@ L'agent te montre le fichier généré et attend ta validation avant de l'écrir
 
 ### Phase 2 — Installation de l'environnement de développement
 
-L'agent installe automatiquement :
+Avant d'installer quoi que ce soit, le script vérifie que **Xcode Command Line Tools** est présent sur ton Mac. C'est le package Apple qui fournit les outils de compilation de base (`git`, `make`, `clang`...) — nécessaire pour que Node.js puisse compiler certains modules natifs lors de son installation. Si absent, le script t'indique comment l'installer (`xcode-select --install`) et attend que tu relances.
+
+L'agent installe ensuite automatiquement :
 - **nvm** — outil qui permet d'installer et de gérer plusieurs versions de Node.js sur ton Mac
 - **Node.js LTS** — l'environnement d'exécution JavaScript nécessaire pour faire tourner clasp
 - **clasp** — l'outil qui permet de pousser ton code depuis ton Mac vers Google Apps Script, sans passer par l'éditeur en ligne
