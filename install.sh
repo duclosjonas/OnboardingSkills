@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # install.sh — OnboardingSkills
-# Installe les skills OpenCode depuis le repo duclosjonas/OnboardingSkills
+# Ce script installe les instructions de travail (appelées "skills") utilisées par l'agent OpenCode.
+# Il télécharge automatiquement les fichiers nécessaires et les place au bon endroit sur ton Mac.
+# Rien n'est installé dans ton navigateur ou dans Google — uniquement des fichiers de configuration locaux.
 # Usage : curl -fsSL https://raw.githubusercontent.com/duclosjonas/OnboardingSkills/main/install.sh | bash
 
 set -e
