@@ -29,6 +29,7 @@ SKILLS_DIR="$HOME/.config/opencode/skills"
 
 SKILLS=(
   "collaborator-onboarding"
+  "collaborator-onboarding-genai"
   "gas-reviewer"
   "gas-impact-analyzer"
   "gas-regression-checker"
