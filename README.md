@@ -10,6 +10,7 @@ En une commande, installe les skills nécessaires et guide le collaborateur à t
 - Mac
 - [OpenCode](https://opencode.ai) installé
 - Connexion internet
+- Xcode Command Line Tools (`xcode-select --install` dans le terminal)
 
 ---
 
