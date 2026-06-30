@@ -59,25 +59,50 @@ Si une étape échoue : partager le message d'erreur exact affiché.
 
 ## PHASE 3 — Authentification Google
 
-> "On va connecter clasp à ton compte Google. Clasp aura besoin d'accéder à Apps Script en ton nom pour pouvoir pousser du code."
+> "On va maintenant connecter clasp à ton compte Google. Clasp — l'outil qu'on vient d'installer — a besoin de ton autorisation pour accéder à tes projets Apps Script en ton nom."
 
-### Étape 3.1 — Lancer le login
+### Étape 3.1 — Recharger le terminal
+
+Avant de lancer clasp, s'assurer que la commande est bien disponible. Demander de lancer dans le terminal :
+
+```bash
+source ~/.zshrc
+```
+
+Puis vérifier que clasp est accessible :
+
+```bash
+clasp --version
+```
+
+Si le résultat affiche un numéro de version → continuer.
+Si le résultat affiche `command not found` → relancer avec le chemin complet :
+
+```bash
+$(npm root -g)/.bin/clasp --version
+```
+
+Si ça fonctionne, expliquer : "clasp est bien installé mais ton terminal ne le trouve pas encore automatiquement. Ferme ce terminal, ouvre-en un nouveau, et relance la même commande — ça devrait être résolu."
+
+### Étape 3.2 — Lancer le login
+
+Dans le terminal (depuis n'importe quel dossier) :
 
 ```bash
 clasp login
 ```
 
 Cela va :
-1. Ouvrir une page dans le navigateur
+1. Ouvrir une page dans ton navigateur automatiquement
 2. Demander de choisir un compte Google
 3. Afficher une liste de permissions à accorder (accès à Apps Script)
 4. Rediriger vers une page de confirmation
 
 > "Accorde toutes les permissions demandées — elles sont nécessaires pour que clasp puisse lire et écrire dans tes projets Apps Script."
 
-### Étape 3.2 — Vérifier l'authentification
+### Étape 3.3 — Vérifier l'authentification
 
-Après la confirmation dans le navigateur, le Terminal doit afficher :
+Après la confirmation dans le navigateur, le terminal doit afficher :
 
 ```
 Authorization successful.
@@ -85,9 +110,12 @@ Authorization successful.
 
 Si ce message n'apparaît pas : demander le message exact affiché et ne pas continuer.
 
+Une fois ce message affiché, annoncer clairement :
+> "Authentification réussie. On peut passer à la suite."
+
 ### Note sur les tokens
 
-> "clasp stocke ton token d'authentification dans `~/.clasprc.json`. Ce fichier est personnel — ne jamais le partager ni le committer dans git."
+> "clasp stocke ton autorisation dans un fichier caché sur ton Mac. Ce fichier est personnel — ne jamais le partager."
 
 ---
 

@@ -20,7 +20,10 @@ Ce skill est invoqué quand un collaborateur démarre avec OpenCode pour la prem
 
 ## Phase 1 — Interview profil de travail
 
-Pose les 6 questions suivantes, une par une. Attends la réponse avant de passer à la suivante. Ne groupe jamais plusieurs questions dans un même message.
+Pose les questions suivantes, une par une. Attends la réponse avant de passer à la suivante. Ne groupe jamais plusieurs questions dans un même message.
+
+**Q0 — Prénom**
+"Pour commencer, comment tu t'appelles ?"
 
 **Q1 — Langue**
 "Dans quelle langue tu travailles principalement avec un agent IA ? (français, anglais, autre)"
@@ -34,15 +37,15 @@ Pose les 6 questions suivantes, une par une. Attends la réponse avant de passer
 **Q4 — Longueur des réponses**
 "Par défaut, tu veux des réponses courtes et directes, ou tu préfères qu'il développe et explique ?"
 
-**Q5 — Expertise**
-"Sur quels sujets tu veux que l'agent t'explique les bases ? Et sur lesquels il peut assumer que tu es à l'aise ?"
+**Q5 — Contexte et usage**
+"C'est quoi ton métier, et qu'est-ce qui t'a amené à utiliser OpenCode ?"
 
 **Q6 — Validation avant action**
 "Sur une tâche courte et claire, l'agent peut agir directement ou tu veux toujours valider avant qu'il modifie quoi que ce soit ?"
 
 **Q7 — Optionnelle**
-Si le collaborateur est à l'aise et engagé dans l'échange :
-"Y a-t-il des sujets ou des façons de faire que tu veux que l'agent évite systématiquement ?"
+Ne poser Q7 que si la réponse à Q2 est vague ou trop courte pour alimenter le bloc `<jamais>` (moins de 2 irritants précis identifiés) :
+"Y a-t-il des façons de faire que tu veux que l'agent évite systématiquement ?"
 
 ### Génération du profil
 
@@ -57,13 +60,13 @@ Si le collaborateur est à l'aise et engagé dans l'échange :
 ---
 
 ## Contexte
-[2-3 lignes issues des réponses Q5 — rôle, domaine, ce qu'il fait concrètement]
+[2-3 lignes issues de Q5 — métier, ce qu'il fait concrètement, ce qui l'a amené à OpenCode]
 
 ---
 
 ## Expertise
-- **Confirmé :** [sujets maîtrisés — Q5]
-- **En progression :** [sujets en apprentissage — Q5]
+- **Confirmé :** [sujets maîtrisés — inférés depuis Q5]
+- **En progression :** [sujets en apprentissage ou objectifs — inférés depuis Q5]
 
 ---
 
@@ -121,8 +124,8 @@ Pose les 3 questions suivantes, une par une.
 **Q1 — Projet existant ou nouveau ?**
 "Tu travailles sur un projet existant ou tu pars de zéro ?"
 
-**Q2 — Stack technique**
-"C'est un projet Google Apps Script (GAS), ou une autre technologie ? (Node.js, Python, autre)"
+**Q2 — Type de projet**
+"Ton projet, c'est quoi ? Est-ce que tu travailles dans Google Workspace (Sheets, Docs, Forms...), ou c'est un autre type d'outil ?"
 
 **Q3 — Nom et description**
 "Quel est le nom du projet et en une phrase, qu'est-ce qu'il fait ?"
@@ -173,6 +176,20 @@ Demander où se trouve le dossier projet si ce n'est pas clair.
 
 ### Pour les projets GAS uniquement
 
+Expliquer avant d'agir :
+> "Je vais maintenant connecter 3 outils de sécurité à ton projet. Ces outils permettent à l'agent de vérifier automatiquement que le code est correct avant de le pousser, et d'analyser l'impact d'une modification. C'est une étape silencieuse — je t'indique quand c'est fait."
+
+Vérifier que les 3 skills source existent dans `~/.config/opencode/skills/` :
+- `gas-reviewer/SKILL.md`
+- `gas-impact-analyzer/SKILL.md`
+- `gas-regression-checker/SKILL.md`
+
+Si l'un est absent, le télécharger depuis le repo OnboardingSkills :
+```bash
+curl -fsSL https://raw.githubusercontent.com/duclosjonas/OnboardingSkills/main/gas-reviewer/SKILL.md -o ~/.config/opencode/skills/gas-reviewer/SKILL.md
+```
+(adapter l'URL pour chaque skill manquant)
+
 Créer les symlinks dans le dossier projet :
 
 ```bash
@@ -182,33 +199,25 @@ ln -sf ~/.config/opencode/skills/gas-impact-analyzer [dossier-projet]/.opencode/
 ln -sf ~/.config/opencode/skills/gas-regression-checker [dossier-projet]/.opencode/skills/gas-regression-checker
 ```
 
-Vérifier que les skills source existent dans `~/.config/opencode/skills/` avant de créer les symlinks. Si absents, les copier depuis le repo OnboardingSkills.
-
-### Pour tous les projets
-
-Vérifier que les 3 skills sont bien présents dans `~/.config/opencode/skills/` :
-- `gas-reviewer/SKILL.md`
-- `gas-impact-analyzer/SKILL.md`
-- `gas-regression-checker/SKILL.md`
-
-Si l'un est absent, le copier depuis le dossier local du repo OnboardingSkills.
+Confirmer une fois terminé :
+> "Les 3 outils de sécurité sont connectés à ton projet."
 
 ---
 
 ## Bilan final
 
-À la fin des 4 phases, afficher ce récapitulatif :
+À la fin des 4 phases, afficher ce récapitulatif en langage simple — sans chemins de fichiers ni jargon technique :
 
 ```
-✅ Profil de travail créé : ~/.config/opencode/AGENTS.md
-✅ Node.js et clasp installés
-✅ Projet configuré : [chemin]/AGENTS.md
-✅ Skills installés : gas-reviewer, gas-impact-analyzer, gas-regression-checker
+Ton environnement est prêt.
 
-Prochaine étape si projet GAS :
-→ Lier clasp à ton projet Apps Script :
-  1. Ouvre script.google.com → ton projet → Paramètres du projet
-  2. Copie l'ID du script
-  3. Dans le terminal, depuis ton dossier projet : clasp clone <ID_SCRIPT>
-  Ou si le projet existe déjà localement : ajouter l'ID dans .clasp.json
+✅ Ton profil de travail est configuré — l'agent connaît tes préférences sur tous tes projets
+✅ Node.js et clasp sont installés — tu peux pousser ton code vers Apps Script depuis ton Mac
+✅ Ton projet est configuré — l'agent connaît son architecture et ses règles
+✅ Les outils de sécurité sont connectés — l'agent vérifie le code avant chaque modification importante
+
+Pour pousser du code vers Apps Script à l'avenir, une seule commande depuis ton dossier projet :
+  clasp push
+
+Si tu as un doute, tu peux toujours me demander.
 ```
