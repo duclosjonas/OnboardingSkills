@@ -146,7 +146,7 @@ cd ~/Projects/[nom-projet]
 Puis lancer le clone :
 
 ```bash
-clasp clone <SCRIPT_ID> --rootDir ./src
+source ~/.zshrc && clasp clone <SCRIPT_ID> --rootDir ./src
 ```
 
 > "`--rootDir ./src` indique à clasp que tous les fichiers `.gs` et `.html` du projet iront dans le sous-dossier `src/` — ce qui correspond à la structure standard du projet."
@@ -167,7 +167,7 @@ Demander le nom du projet, puis :
 ```bash
 mkdir -p ~/Projects/[nom-projet]/src
 cd ~/Projects/[nom-projet]
-clasp create --title "[Nom du projet]" --type webapp --rootDir ./src
+source ~/.zshrc && clasp create --title "[Nom du projet]" --type webapp --rootDir ./src
 ```
 
 > "`--type webapp` configure le projet comme une WebApp Google Apps Script — le type le plus courant pour un projet avec une interface utilisateur."
@@ -186,10 +186,12 @@ Résultat attendu :
 ### Étape 5.1 — Push
 
 ```bash
-clasp push
+source ~/.zshrc && clasp push
 ```
 
 Depuis le dossier racine du projet (là où se trouve `.clasp.json`).
+
+> `source ~/.zshrc` recharge l'environnement shell pour s'assurer que clasp est bien accessible — nécessaire quand la commande est exécutée depuis OpenCode.
 
 Résultat attendu :
 
