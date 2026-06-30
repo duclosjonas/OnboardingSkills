@@ -25,13 +25,16 @@ C'est tout. Le script installe les skills au bon endroit automatiquement.
 
 ## Démarrage
 
-Une fois l'installation terminée :
+Une fois l'installation terminée, ouvre OpenCode et tape le prompt correspondant à ton profil :
 
-1. Ouvre OpenCode
-2. Tape ce prompt :
-
+**Nouveau collaborateur :**
 ```
 use skill collaborator-onboarding
+```
+
+**Membre de l'équipe Transfo :**
+```
+use skill collaborator-onboarding-transfo
 ```
 
 L'agent prend le relais et enchaîne les 4 phases dans l'ordre.
