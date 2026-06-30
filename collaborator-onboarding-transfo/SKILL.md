@@ -238,7 +238,7 @@ Ton environnement est prêt.
 ✅ Mode Plan activé — tu valides chaque action avant qu'elle soit exécutée
 
 Avant ta première session de travail, lis ce guide (2 minutes) :
-→ https://grimoire.valiuz.io/fr/docs/ai/vibecoding/concepts/opencode-guide/
+→ https://github.com/duclosjonas/OnboardingSkills/blob/main/OPENCODE_GUIDE.md
 
 Il explique comment bien travailler avec l'agent : sessions, prompts, choix du modèle.
 ```
