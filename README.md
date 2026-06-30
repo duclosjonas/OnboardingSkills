@@ -51,7 +51,7 @@ L'agent te pose quelques questions, une par une :
 - Ton métier et ce qui t'a amené à utiliser OpenCode
 - Ton mode de validation : agir directement sur les tâches courtes, ou toujours confirmer avant
 
-À partir de tes réponses, l'agent génère un fichier `~/.config/opencode/AGENTS.md` — ton profil personnel. Ce fichier est automatiquement chargé sur tous tes projets OpenCode : il calibre la posture, le format et le comportement de l'agent pour toutes tes conversations futures.
+À partir de tes réponses, l'agent génère un fichier de profil personnel sur ton Mac. Ce fichier est automatiquement chargé sur tous tes projets OpenCode : il calibre la posture, le format et le comportement de l'agent pour toutes tes conversations futures.
 
 L'agent te montre le fichier généré et attend ta validation avant de l'écrire.
 
@@ -59,14 +59,9 @@ L'agent te montre le fichier généré et attend ta validation avant de l'écrir
 
 ### Phase 2 — Installation de l'environnement de développement
 
-Avant d'installer quoi que ce soit, le script vérifie que **Xcode Command Line Tools** est présent sur ton Mac. C'est le package Apple qui fournit les outils de compilation de base (`git`, `make`, `clang`...) — nécessaire pour que Node.js puisse compiler certains modules natifs lors de son installation. Si absent, le script t'indique comment l'installer (`xcode-select --install`) et attend que tu relances.
+L'agent installe automatiquement les outils nécessaires sur ton Mac. Si une étape échoue, il t'indique quoi faire.
 
-L'agent installe ensuite automatiquement :
-- **nvm** — outil qui permet d'installer et de gérer plusieurs versions de Node.js sur ton Mac
-- **Node.js LTS** — l'environnement d'exécution JavaScript nécessaire pour faire tourner clasp
-- **clasp** — l'outil qui permet de pousser ton code depuis ton Mac vers Google Apps Script, sans passer par l'éditeur en ligne
-
-Il te guide ensuite pour te connecter à ton compte Google via OAuth, ce qui permet à clasp d'accéder à tes projets Apps Script.
+À la fin de cette phase, ton environnement est prêt.
 
 ---
 
@@ -79,65 +74,41 @@ L'agent te pose 3 questions sur ton projet :
 
 Selon tes réponses, il choisit le bon chemin :
 
-**Projet GAS existant** — l'agent audite tous tes fichiers `.gs` et `.html`, identifie les patterns, les dépendances et les risques, puis génère les fichiers de gouvernance du projet :
+**Projet Google Apps Script existant** — l'agent audite tous tes fichiers, identifie les patterns, les dépendances et les risques, puis génère les fichiers de gouvernance du projet :
 - `AGENTS.md` — architecture, conventions de code, patterns récurrents, fichiers clés
 - `TODO.md` — registre des bugs, améliorations et tâches identifiés pendant l'audit
-- `TESTS.md` — parcours critiques à tester manuellement avant chaque push
+- `TESTS.md` — parcours critiques à tester manuellement avant chaque modification
 - `CHANGELOG.md` — historique des modifications
 
-**Projet GAS nouveau** — l'agent t'interview sur le besoin, crée la structure de dossiers locale et génère un template `00_Config.gs` prêt à l'emploi, puis te guide pour créer le projet dans Apps Script.
+**Projet Google Apps Script nouveau** — l'agent t'interview sur le besoin, te guide pour créer le projet dans Google Apps Script en ligne, puis génère un template de démarrage prêt à l'emploi.
 
-**Autre stack** — l'agent génère un `AGENTS.md` minimal adapté à la technologie.
+**Autre technologie** — l'agent génère un fichier de gouvernance minimal adapté à ta stack.
 
 ---
 
-### Phase 4 — Installation des skills de sécurisation
+### Phase 4 — Installation des outils de sécurisation
 
-Pour les projets GAS, l'agent installe et lie au projet les 3 skills de sécurisation :
+Pour les projets Google Apps Script, l'agent connecte 3 outils au projet :
 
-| Skill | Rôle |
+| Outil | Rôle |
 |---|---|
-| `gas-reviewer` | Review automatique des fichiers GAS avant push — détecte les issues critiques, bloquantes ou à surveiller |
-| `gas-impact-analyzer` | Analyse l'impact d'une modification avant de coder — classifie LOW / MEDIUM / HIGH et bloque si nécessaire |
-| `gas-regression-checker` | Après chaque modification, liste les tests manuels à effectuer avant de pousser en production |
+| `gas-reviewer` | Vérifie automatiquement les fichiers avant chaque modification importante |
+| `gas-impact-analyzer` | Analyse l'impact d'un changement avant de coder — bloque si le risque est élevé |
+| `gas-regression-checker` | Liste les tests à effectuer manuellement après chaque modification |
 
-Ces skills sont disponibles dans OpenCode pour toutes les sessions futures sur ce projet.
+Ces outils sont disponibles dans OpenCode pour toutes les sessions futures sur ce projet.
 
 ---
 
 ## Ce que tu obtiens à la fin
 
 ```
-~/.config/opencode/AGENTS.md       — ton profil personnel (tous projets)
-[projet]/AGENTS.md                 — gouvernance du projet
-[projet]/TODO.md                   — registre des travaux identifiés
-[projet]/TESTS.md                  — parcours de tests critiques
-[projet]/CHANGELOG.md              — historique
-[projet]/.opencode/skills/         — gas-reviewer, gas-impact-analyzer, gas-regression-checker
-```
-
----
-
-## Lier clasp à un projet GAS existant
-
-Cette étape est manuelle — elle se fait une fois par projet.
-
-1. Ouvre [script.google.com](https://script.google.com)
-2. Ouvre ton projet Apps Script → icône ⚙️ Paramètres du projet
-3. Copie l'**ID du script**
-4. Dans ton terminal, depuis le dossier du projet :
-
-```bash
-# Si tu veux cloner le projet localement depuis Apps Script :
-clasp clone <ID_SCRIPT>
-
-# Si le code est déjà en local, créer .clasp.json manuellement :
-echo '{"scriptId":"<ID_SCRIPT>","rootDir":"."}' > .clasp.json
-```
-
-5. Vérifie que ça fonctionne :
-```bash
-clasp status
+Ton profil personnel         — chargé automatiquement sur tous tes projets OpenCode
+[projet]/AGENTS.md           — gouvernance du projet
+[projet]/TODO.md             — registre des travaux identifiés
+[projet]/TESTS.md            — parcours de tests critiques
+[projet]/CHANGELOG.md        — historique
+[projet]/.opencode/skills/   — gas-reviewer, gas-impact-analyzer, gas-regression-checker
 ```
 
 ---
