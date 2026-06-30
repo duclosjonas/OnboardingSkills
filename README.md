@@ -5,9 +5,19 @@ En une commande, installe les skills nécessaires et guide le collaborateur à t
 
 ---
 
+## Avant de commencer
+
+Si tu n'es pas familier avec Google Apps Script, lis ce document avant de te lancer :
+
+**[Google Apps Script — Concepts](https://grimoire.valiuz.io/fr/docs/ai/vibecoding/concepts/google-apps-script/)**
+
+Il explique ce qu'est Apps Script, ce qu'il peut faire, comment fonctionne le déploiement, et les responsabilités qui vont avec. Il ne nécessite pas d'être développeur pour être compris — mais il est indispensable avant de créer ou modifier un script.
+
+---
+
 ## Prérequis
 
-Avoir fait l'onboarding OpenCode via l'équipe Gen IA. C'est tout — OpenCode est déjà installé sur ton Mac.
+Avoir fait l'onboarding OpenCode via l'équipe Transfo. C'est tout — OpenCode est déjà installé sur ton Mac.
 
 ---
 
