@@ -106,13 +106,13 @@ Si le fichier `~/.config/opencode/AGENTS.md` existe déjà, le signaler et deman
 
 ## Phase 2 — Installation Node.js et clasp
 
-Invoquer le skill `gas-setup-node-clasp` :
+Invoquer le skill `gas-setup-node-clasp-off` :
 
 ```
-use skill gas-setup-node-clasp
+use skill gas-setup-node-clasp-off
 ```
 
-Ce skill installe nvm, Node.js LTS, clasp en global, et guide le login OAuth Google.
+Ce skill installe nvm, Node.js LTS et les outils de développement nécessaires.
 Attendre que le skill confirme que l'installation est complète avant de passer à la Phase 3.
 
 ---
