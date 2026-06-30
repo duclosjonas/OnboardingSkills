@@ -1,9 +1,9 @@
 ---
-name: collaborator-onboarding-genai
-description: Use when a new Gen IA team member starts with OpenCode. Same as collaborator-onboarding but uses gas-setup-node-clasp (full clasp access) instead of gas-setup-node-clasp-off.
+name: collaborator-onboarding-transfo
+description: Use when a new Transfo team member starts with OpenCode. Same as collaborator-onboarding but uses gas-setup-node-clasp (full clasp access) instead of gas-setup-node-clasp-off.
 ---
 
-# Skill — Collaborator Onboarding (Gen IA)
+# Skill — Collaborator Onboarding (Transfo)
 
 ## Description
 Skill d'onboarding complet pour un nouveau collaborateur OpenCode.
