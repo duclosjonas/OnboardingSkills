@@ -146,7 +146,7 @@ Pose les 3 questions suivantes, une par une.
 "Tu travailles sur un projet existant ou tu pars de zéro ?"
 
 **Q2 — Type de projet**
-"Ton projet, c'est quoi ? Est-ce que tu travailles dans Google Workspace (Sheets, Docs, Forms...), ou c'est un autre type d'outil ?"
+"Ton projet tourne dans Google Workspace — Sheets, Docs, Forms, Apps Script — ou c'est un autre type d'outil ?"
 
 **Q3 — Nom et description**
 "Quel est le nom du projet et en une phrase, qu'est-ce qu'il fait ?"
@@ -155,17 +155,17 @@ Pose les 3 questions suivantes, une par une.
 
 Selon les réponses :
 
-**Si projet GAS existant → invoquer le skill `gas-onboarding-existing`**
+**Si Q2 = Google Workspace ET Q1 = projet existant → invoquer le skill `gas-onboarding-existing`**
 ```
 use skill gas-onboarding-existing
 ```
 
-**Si projet GAS nouveau → invoquer le skill `gas-onboarding-new`**
+**Si Q2 = Google Workspace ET Q1 = nouveau projet → invoquer le skill `gas-onboarding-new`**
 ```
 use skill gas-onboarding-new
 ```
 
-**Si autre stack (Node, Python, etc.) → générer un AGENTS.md minimal**
+**Si Q2 = autre technologie → générer un AGENTS.md minimal**
 
 Créer `[dossier-projet]/AGENTS.md` avec ce template :
 
