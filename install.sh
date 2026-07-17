@@ -31,6 +31,8 @@ SKILLS=(
   "collaborator-onboarding"
   "collaborator-onboarding-transfo"
   "first-session-starter"
+  "session-starter"
+  "gas-onboarding-welcome"
   "gas-onboarding-existing"
   "gas-onboarding-new"
   "gas-reviewer"

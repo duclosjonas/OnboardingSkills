@@ -26,11 +26,24 @@ Tu ne génères aucune ligne de logique métier. Tu audites et tu documentes.
 ## PRÉAMBULE — Fichiers en local ?
 
 Avant de commencer, vérifier si les fichiers .gs sont déjà en local.
-Si non (uniquement dans Apps Script en ligne) :
 
-> "Avant l'audit, on va copier tes fichiers en local. Dans Apps Script, pour chaque fichier .gs : clique sur les 3 points → Afficher → sélectionne tout (Cmd+A) → copie (Cmd+C). Crée ensuite le fichier correspondant dans `~/Projects/[nom-projet]/src/` et colle le contenu. Dis-moi quand c'est fait."
+**Si oui (via `clasp pull` ou copier-coller déjà fait) :** passer directement à la Phase 1.
+
+**Si non (uniquement dans Apps Script en ligne) :**
+> "Avant l'audit, tu as deux options pour récupérer tes fichiers en local :
+> - **Option 1 — clasp :** si tu as clasp configuré, lance `clasp pull` depuis ton dossier projet. Dis-moi quand c'est fait.
+> - **Option 2 — copier-coller :** dans Apps Script, pour chaque fichier .gs : clique sur les 3 points → Afficher → sélectionne tout (Cmd+A) → copie (Cmd+C). Crée le fichier correspondant dans `~/Projects/[nom-projet]/` et colle le contenu. Dis-moi quand c'est fait."
 
 Attendre confirmation avant de passer à la Phase 1.
+
+---
+
+## REPRISE — Interview déjà faite ?
+
+Si l'utilisateur indique que les questions d'interview ont déjà été répondues dans une session précédente :
+> "D'accord. Dis-moi ce que tu te souviens avoir répondu — nom du projet, utilisateurs, parcours critique. Je fais la synthèse et on passe directement à l'audit."
+
+Afficher la synthèse Phase 1 avec les infos fournies, demander "C'est bon ?", puis passer à la Phase 2 sans re-poser les questions.
 
 ---
 
