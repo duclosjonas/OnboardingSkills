@@ -40,6 +40,7 @@ SKILLS=(
   "gas-regression-checker"
   "gas-setup-node-clasp"
   "gas-setup-node-clasp-off"
+  "gas-project-handoff"
 )
 
 echo ""
