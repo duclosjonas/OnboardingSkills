@@ -1,13 +1,15 @@
 ---
 name: collaborator-onboarding
-description: Use when a new collaborator starts with OpenCode. Guides through 4 phases in order: work profile interview (generates ~/.config/opencode/AGENTS.md), Node.js and clasp installation, project setup (existing or new, GAS or other stack), and security skills installation (gas-reviewer, gas-impact-analyzer, gas-regression-checker).
+description: Use when a new collaborator starts with OpenCode. Guides through 3 phases in order: work profile interview (generates ~/.config/opencode/AGENTS.md), project setup (existing or new, GAS or other stack — copy-paste workflow, no clasp), and security skills installation (gas-reviewer, gas-impact-analyzer, gas-regression-checker).
 ---
 
 # Skill — Collaborator Onboarding
 
 ## Description
 Skill d'onboarding complet pour un nouveau collaborateur OpenCode.
-Enchaîne 4 phases dans l'ordre : profil de travail → installation Node.js + clasp → configuration projet → installation des skills de sécurisation.
+Enchaîne 3 phases dans l'ordre : profil de travail → configuration projet → installation des skills de sécurisation.
+
+> Pas d'installation clasp dans ce parcours — le sujet clasp n'a pas encore avancé côté équipe. Les projets GAS fonctionnent en copier-coller vers l'éditeur Apps Script en ligne (script.google.com).
 
 À exécuter une seule fois, en début de collaboration.
 
@@ -113,10 +115,9 @@ Après confirmation et écriture du fichier, activer le mode Plan par défaut :
 ```bash
 mkdir -p ~/.config/opencode && node -e "
 const fs = require('fs');
-const path = '${HOME}/.config/opencode/config.json';
+const path = '${HOME}/.config/opencode/opencode.json';
 const config = fs.existsSync(path) ? JSON.parse(fs.readFileSync(path, 'utf8')) : {};
-config.autoshare = config.autoshare || {};
-config.mode = 'plan';
+config.default_agent = 'plan';
 fs.writeFileSync(path, JSON.stringify(config, null, 2));
 "
 ```
@@ -125,20 +126,7 @@ Confirmer : "Le mode Plan est activé par défaut — tu devras valider chaque a
 
 ---
 
-## Phase 2 — Installation Node.js et clasp
-
-Invoquer le skill `gas-setup-node-clasp-off` :
-
-```
-use skill gas-setup-node-clasp-off
-```
-
-Ce skill installe nvm, Node.js LTS et les outils de développement nécessaires.
-Attendre que le skill confirme que l'installation est complète avant de passer à la Phase 3.
-
----
-
-## Phase 3 — Interview projet
+## Phase 2 — Interview projet
 
 Pose les 3 questions suivantes, une par une.
 
@@ -193,7 +181,7 @@ Demander où se trouve le dossier projet si ce n'est pas clair.
 
 ---
 
-## Phase 4 — Installation des skills de sécurisation
+## Phase 3 — Installation des skills de sécurisation
 
 ### Pour les projets GAS uniquement
 
@@ -227,14 +215,12 @@ Confirmer une fois terminé :
 
 ## Bilan final
 
-À la fin des 4 phases, afficher ce récapitulatif en langage simple — sans chemins de fichiers ni jargon technique :
+À la fin des 3 phases, afficher ce récapitulatif en langage simple — sans chemins de fichiers ni jargon technique :
 
 ```
 Ton environnement est prêt.
 
 ✅ Ton profil de travail est configuré — l'agent connaît tes préférences sur tous tes projets
-✅ Ton profil de travail est configuré — l'agent connaît tes préférences sur tous tes projets
-✅ Ton environnement de développement est installé
 ✅ Ton projet est configuré — l'agent connaît son architecture et ses règles
 ✅ Les outils de sécurité sont connectés — l'agent vérifie le code avant chaque modification importante
 ✅ Mode Plan activé — tu valides chaque action avant qu'elle soit exécutée

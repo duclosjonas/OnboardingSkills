@@ -234,7 +234,7 @@ Ne s'applique que si Q3 (Phase 0) = "utilisera OpenCode pour des évolutions fut
 Si OpenCode n'est pas installé du tout chez le repreneur :
 > "Avant de préparer le reste, on installe OpenCode sur ta machine."
 
-Invoquer `collaborator-onboarding` (ou son équivalent `-transfo` selon le contexte de l'équipe). Ce skill couvre déjà l'installation Node/OpenCode et une interview de profil de travail — laisser ce skill dérouler sa propre logique plutôt que de la dupliquer ici. Une fois revenu dans `gas-project-handoff`, poursuivre en 3.2.
+Invoquer `collaborator-onboarding`. Ce skill couvre déjà une interview de profil de travail — laisser ce skill dérouler sa propre logique plutôt que de la dupliquer ici. Une fois revenu dans `gas-project-handoff`, poursuivre en 3.2.
 
 Si OpenCode est déjà installé (avec ou sans skills) → passer directement à 3.2.
 

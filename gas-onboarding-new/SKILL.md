@@ -450,20 +450,9 @@ Registre unique des travaux à réaliser.
 
 ---
 
-## PHASE 2b — CONFIGURATION DE CLASP
-
-Avant de passer au guide Apps Script, configurer l'environnement de développement :
-
-> "Pour que OpenCode puisse pousser ton code directement vers Apps Script (sans copier-coller à chaque fois), on a besoin de configurer clasp. Je charge le skill dédié."
-
-Charger et exécuter le skill `gas-setup-node-clasp` dans son intégralité.
-Ne reprendre la Phase 3 qu'une fois que `clasp push` fonctionne et que le projet est lié.
-
----
-
 ## PHASE 3 — GUIDE APPS SCRIPT EN LIGNE
 
-Une fois clasp configuré et le projet lié, guider manuellement étape par étape :
+Guider manuellement étape par étape :
 
 > "Maintenant on va créer le projet dans Google Apps Script. C'est là que ton code s'exécutera réellement. Suis ces étapes :"
 

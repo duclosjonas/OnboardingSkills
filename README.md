@@ -45,17 +45,11 @@ C'est tout. Le script installe les skills au bon endroit automatiquement.
 
 Une fois l'installation terminée, ouvre OpenCode et tape le prompt correspondant à ton profil :
 
-**Nouveau collaborateur :**
 ```
 use skill collaborator-onboarding
 ```
 
-**Membre de l'équipe Transfo :**
-```
-use skill collaborator-onboarding-transfo
-```
-
-L'agent prend le relais et enchaîne les 4 phases dans l'ordre.
+L'agent prend le relais et enchaîne les 3 phases dans l'ordre.
 
 ---
 
@@ -78,15 +72,7 @@ L'agent te montre le fichier généré et attend ta validation avant de l'écrir
 
 ---
 
-### Phase 2 — Installation de l'environnement de développement
-
-L'agent installe automatiquement les outils nécessaires sur ton Mac. Si une étape échoue, il t'indique quoi faire.
-
-À la fin de cette phase, ton environnement est prêt.
-
----
-
-### Phase 3 — Configuration du projet
+### Phase 2 — Configuration du projet
 
 L'agent te pose 3 questions sur ton projet :
 - Projet existant ou nouveau ?
@@ -105,9 +91,11 @@ Selon tes réponses, il choisit le bon chemin :
 
 **Autre technologie** — l'agent génère un fichier de gouvernance minimal adapté à ta stack.
 
+> Pas d'installation clasp dans ce parcours — le sujet n'a pas encore avancé côté équipe. Les projets GAS fonctionnent en copier-coller vers l'éditeur Apps Script en ligne (script.google.com).
+
 ---
 
-### Phase 4 — Installation des outils de sécurisation
+### Phase 3 — Installation des outils de sécurisation
 
 Pour les projets Google Apps Script, l'agent connecte 3 outils au projet :
 

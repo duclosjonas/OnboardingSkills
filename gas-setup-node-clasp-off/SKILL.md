@@ -1,63 +1,28 @@
 ---
 name: gas-setup-node-clasp-off
-description: Use when a collaborator needs to set up their development environment without clasp access. Installs nvm and Node.js, then guides the collaborator through the manual copy-paste workflow in the Google Apps Script online editor.
+description: Use when a collaborator needs to work on Google Apps Script without clasp access. Guides the collaborator through the manual copy-paste workflow in the Google Apps Script online editor — no local tooling installation required.
 ---
 
-# GAS Setup — Environnement de développement
+# GAS Setup — Workflow copier-coller
 
-Tu guides quelqu'un qui configure son environnement pour travailler sur un projet Google Apps Script.
+Tu guides quelqu'un qui va travailler sur un projet Google Apps Script sans clasp.
 
-Objectif final : l'environnement est installé et le collaborateur sait comment modifier et publier son code via l'éditeur Google Apps Script en ligne.
+Objectif final : le collaborateur sait comment créer, modifier et publier son code via l'éditeur Google Apps Script en ligne, en copiant-collant depuis les fichiers locaux générés par OpenCode.
+
+> Aucune installation d'outil n'est nécessaire pour ce workflow (pas de Node.js, pas de clasp) — tout se passe entre l'éditeur local et script.google.com.
 
 ---
 
 ## RÈGLES ABSOLUES
 
-- Exécuter chaque commande UNE PAR UNE et attendre la confirmation que ça a marché
+- Exécuter chaque étape UNE PAR UNE et attendre la confirmation que ça a marché
 - Ne jamais passer à l'étape suivante si la précédente n'est pas confirmée
 - Expliquer en une phrase POURQUOI on fait chaque chose
 - Si une erreur survient : ne pas deviner, demander le message d'erreur exact
 
 ---
 
-## PHASE 1 — Installation automatique de l'environnement
-
-> "Un script fait tout automatiquement : il installe les outils de développement nécessaires sur ton Mac. Lance une seule commande et suis les instructions."
-
-### Étape 1.1 — Lancer le script d'installation
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/duclosjonas/OnboardingSkills/main/setup.sh | bash
-```
-
-Le script gère tout dans l'ordre :
-- Vérifie si les outils de compilation macOS sont installés
-- Installe nvm (gestionnaire de versions Node.js)
-- Installe Node.js LTS
-- Installe les outils de développement nécessaires
-- Configure ton terminal pour la persistance
-
-**Si le script s'arrête avec ce message :**
-```
-⚠️ Xcode Command Line Tools manquant.
-Lance cette commande : xcode-select --install
-```
-→ Lancer `xcode-select --install` dans le terminal. Une fenêtre macOS s'ouvre — cliquer sur **"Installer"** (pas "Obtenir Xcode"). Attendre 5-10 minutes, puis relancer le script.
-
-**Résultat attendu en fin de script :**
-```
-✅ Xcode Command Line Tools détecté
-✅ nvm x.x.x
-✅ Node.js vxx.x.x
-✅ npm xx.x.x
-✅ clasp x.x.x
-```
-
-Si une étape échoue : partager le message d'erreur exact affiché.
-
----
-
-## PHASE 2 — Créer le projet dans Google Apps Script
+## PHASE 1 — Créer le projet dans Google Apps Script
 
 > "On va maintenant créer ton projet directement dans l'éditeur Google Apps Script en ligne."
 
@@ -69,7 +34,7 @@ Si une étape échoue : partager le message d'erreur exact affiché.
 
 ---
 
-## PHASE 3 — Ajouter et organiser les fichiers
+## PHASE 2 — Ajouter et organiser les fichiers
 
 > "On va maintenant créer les fichiers du projet et y coller le code."
 
@@ -101,7 +66,7 @@ Si une erreur apparaît : partager le message exact affiché.
 
 ---
 
-## PHASE 4 — Clôture
+## PHASE 3 — Clôture
 
 ```
 Environnement prêt.
@@ -115,5 +80,3 @@ Pour modifier du code à l'avenir :
 Pour déployer une modification :
   → Déployer → Gérer les déploiements → Nouvelle version
 ```
-
-Si ce skill a été déclenché depuis `gas-onboarding-new` : reprendre à la Phase 3 de `gas-onboarding-new` (guide Apps Script en ligne).
