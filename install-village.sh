@@ -2,8 +2,8 @@
 # install-village.sh — OnboardingSkills
 # Installe UN seul skill : village-first-deploy, qui t'accompagne pour déployer ta première
 # application sur le Village (plateforme interne Valiuz).
-# Le skill tient en trois fichiers : SKILL.md (le parcours) et deux fichiers de référence
-# dans references/ (ce que le Village permet ou non, détails fins).
+# Le skill tient en quatre fichiers : SKILL.md (le parcours) et trois fichiers de référence
+# dans references/ (ce que le Village permet ou non, détails fins, migration d'un Apps Script).
 # Rien n'est installé dans ton navigateur ou dans Google — uniquement des fichiers de
 # configuration locaux pour l'agent OpenCode.
 # Usage : curl -fsSL https://raw.githubusercontent.com/duclosjonas/OnboardingSkills/main/install-village.sh | bash
@@ -13,7 +13,7 @@ set -e
 REPO_URL="https://raw.githubusercontent.com/duclosjonas/OnboardingSkills/main"
 SKILLS_DIR="${SKILLS_DIR:-$HOME/.config/opencode/skills}"
 SKILL="village-first-deploy"
-FILES=("SKILL.md" "references/village.md" "references/details.md")
+FILES=("SKILL.md" "references/village.md" "references/details.md" "references/migration-gas.md")
 
 echo ""
 echo "=== Installation du skill Village ==="
@@ -56,7 +56,7 @@ for f in "${FILES[@]}"; do
   chmod 644 "$SKILLS_DIR/$SKILL/$f"
 done
 
-echo "✅ $SKILL installé dans $SKILLS_DIR/$SKILL (3 fichiers)"
+echo "✅ $SKILL installé dans $SKILLS_DIR/$SKILL (4 fichiers)"
 echo ""
 echo "Avant de commencer :"
 echo "  • Connecte le VPN d'entreprise (Zscaler) : sans lui, rien ne fonctionne."

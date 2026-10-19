@@ -194,7 +194,10 @@ ce soit, un point à la fois :
 
 *Cas relevé le 12/10/2026 sur une application reprise : 29 écritures dans le code. L'écriture est
 affirmée par le wiki mais **n'a jamais été prouvée** : la première application qui l'essaie sert
-de preuve. Le dire à l'utilisateur.*
+de preuve. Test prévu par Jonas sur `calendrier-edito` (à la date du 19/10/2026, pas encore fait :
+mettre à jour ici le résultat). En migration d'un Apps Script (phase C du skill), la première
+mise en ligne se fait sur une **copie** du Sheets tant que ce test n'a pas réussi. Ne le dire à
+l'utilisateur que si l'écriture échoue réellement.*
 
 **Avant tout, compter** : demander à l'agent de lister chaque appel Google en deux colonnes,
 LECTURE ou ÉCRITURE, avec l'onglet concerné. Ne pas supposer « lecture seule » : une application

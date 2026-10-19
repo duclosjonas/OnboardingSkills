@@ -1,6 +1,6 @@
 ---
 name: village-first-deploy
-description: Use when someone (typically non-technical) wants to put their first application on the Valiuz "Village" (gitea-village.valiuz.io), or is blocked partway through - joining Village, SSH key, access to Gitea, creating a vibeapp, Dockerfile, first deploy, a red build, adding colleagues, or reading logs. Also use for any question about what the Village allows or does not allow (Google Sheets, mails, database, who can open an app). Walks through access, creation, build, deploy and collaborators one step at a time, skipping what is already done. Provides a minimal starter application (a "Bonjour" page) for people who have no code yet.
+description: Use when someone (typically non-technical) wants to put their first application on the Valiuz "Village" (gitea-village.valiuz.io), or is blocked partway through - joining Village, SSH key, access to Gitea, creating a vibeapp, Dockerfile, first deploy, a red build, adding colleagues, or reading logs. Also use for any question about what the Village allows or does not allow (Google Sheets, mails, database, who can open an app). Walks through access, creation, build, deploy and collaborators one step at a time, skipping what is already done. Provides a minimal starter application (a "Bonjour" page) for people who have no code yet, then chains into migrating an existing Google Apps Script to the Village.
 ---
 
 # Village - premier déploiement
@@ -10,10 +10,85 @@ application sur le Village (plateforme interne Valiuz). Objectif final : son
 application répond sur `https://<nom>.valiuz.ai/`, accessible seulement aux
 personnes autorisées.
 
-> **Statut : version du 12/10/2026, jamais parcourue par une autre personne que son
-> concepteur** (trois applications Python). Chaque phase indique si elle a été
-> testée. Quand tu rencontres un cas non prévu, note-le et propose à l'utilisateur
-> de l'ajouter ici.
+> **Statut : version du 19/10/2026.** Conçue sur trois applications Python, puis parcourue
+> une première fois par un collègue non développeur (Guillaume, 19/10) : les parties A et B
+> ont été réécrites à partir de ses retours, la partie C (migration d'un Apps Script) n'a
+> **jamais été exécutée**. Chaque phase indique si elle a été testée. Quand tu rencontres
+> un cas non prévu, note-le et propose à l'utilisateur de l'ajouter ici.
+
+## Le parcours en trois parties
+
+Objectif réel de la plupart des utilisateurs : **remplacer leur Apps Script par une
+application sur le Village.** Le parcours va donc vite jusqu'à un premier lien qui marche,
+puis enchaîne sur la migration.
+
+| Partie | Phases du skill | Fin de partie |
+|---|---|---|
+| **A. Accès** | 0, 1, 2.0 | `ssh -T` répond, demande « Join Village » envoyée |
+| **B. Premier lien** | 2.1, 3, 4 | l'utilisateur ouvre `<nom>.valiuz.ai` et répond « ok » |
+| **C. Migration** | Phase C | l'application remplace l'Apps Script, validée par l'utilisateur |
+
+Les phases 5 à 7 (autoriser d'autres personnes, clôture, logs) ne se déroulent qu'après la
+partie C, ou si l'utilisateur les demande.
+
+**Si l'utilisateur n'a pas d'Apps Script à migrer** (il veut construire autre chose) : après
+le « ok » de la partie B, remplacer la partie C par une question unique : « Qu'est-ce que tu
+veux construire ? », puis construire à partir de la réponse.
+
+## Règle n°1 : décider à la place de l'utilisateur, et aller vite
+
+L'utilisateur n'est pas développeur et n'a pas à apprendre la plomberie. Il veut son
+application en ligne. Donc :
+
+- **Tu prends seul toute décision technique** (langage, version, fichiers de fabrication,
+  port, contrôles de santé, dépendances, structure du code) et tu l'exécutes sans la présenter
+  ni demander d'accord. Tu ne poses que les questions que lui seul peut trancher : ce que fait
+  l'application, son nom, qui peut l'ouvrir, quelles données elle utilise.
+- **Tu fais toi-même les contrôles techniques sans risque** (démarrer l'application en local,
+  appeler ses pages, lire un fichier) et tu ne rapportes que le résultat. Ne **jamais**
+  demander à l'utilisateur de lancer un serveur, d'ouvrir `127.0.0.1` ou de faire Ctrl+C.
+- **Un écart technique** (le catalogue et le wiki disent deux choses, une version a changé) :
+  tu le tranches en silence (le catalogue gagne) et tu le notes dans `~/.village-ref/notes-skill.md`
+  (une ligne datée). Tu ne le racontes pas à l'utilisateur ; tu en donnes un résumé en 3
+  lignes à la clôture, pour qu'il le transmette à Jonas.
+- **Un message fait 5 à 6 lignes au maximum** (hors commande ou lien), avec **une seule
+  question** ou une seule action demandée.
+- **Après un succès** : une ligne pour le dire, puis le seul prochain pas. Jamais de bilan,
+  jamais de liste de ce qui « n'est pas encore connecté » ou « pas prouvé » : ce sont des
+  informations pour toi. Tu les traites au moment où elles deviennent nécessaires, et tu ne
+  les dis que si elles bloquent vraiment, en une phrase, avec une solution.
+- **Un seul accord explicite est demandé** : l'envoi sur le Village (`git push`), plus la
+  modification d'un fichier personnel. Écrire ou modifier les fichiers du projet ne demande
+  aucun accord.
+
+## Bloc « Où on en est »
+
+Au **début de chaque partie** (A, B, C), affiche ce bloc tel quel, rempli, puis enchaîne. Il
+sert aussi à l'utilisateur : s'il est bloqué, il le copie et l'envoie à Jonas, qui voit
+immédiatement où il en est sans relire la conversation. Cinq lignes, aucun mot technique. Tiens
+la ligne « Déjà fait » à jour.
+
+```
+── PARTIE <A, B ou C> · <titre> ──
+Objectif : <ce qu'on obtient à la fin>.
+Ce qui va se passer : <les grandes étapes, en une phrase>.
+Ce que tu fais : <ce qui est demandé à l'utilisateur>.
+Déjà fait : <ce qui est en place>.
+Si tu bloques : copie ce bloc et envoie-le à Jonas.
+```
+
+Contenu de départ (à adapter à l'état réel) :
+- **A · Accès** : « avoir accès au Village » ; « je vérifie ton poste, tu crées ta clé, tu te
+  connectes, tu demandes à rejoindre le Village » ; « copier quelques commandes et cliquer
+  dans ton navigateur ».
+- **B · Premier lien** : « avoir une page à ton adresse valiuz.ai » ; « je crée la page, je te
+  demande ton accord, je la mets en ligne » ; « répondre ok à la mise en ligne, ouvrir le lien
+  et me dire ok ».
+- **C · Migration** : « ton Apps Script tourne sur le Village » ; « tu m'indiques où il est, je
+  te pose quelques questions, je le réécris en entier, puis on l'essaie sur une copie de ton
+  Sheets » ; « répondre à mes questions et valider le résultat ».
+
+À la **fin** de chaque partie, une seule ligne de clôture, puis le bloc de la partie suivante.
 
 ## Trois sources, à ne pas confondre
 
@@ -26,6 +101,11 @@ personnes autorisées.
 3. **`references/details.md`** : les détails fins (contrat de l'application, base et
    pgweb, secrets, portées Google, droits, tailles). **À ouvrir seulement si la
    question de l'utilisateur le demande**, pour ne pas charger du contexte inutile.
+4. **`references/migration-gas.md`** : inventaire et équivalences Apps Script vers Village.
+   **À lire en entrant dans la phase C**, pas avant.
+
+`~/.village-ref/notes-skill.md` est ton carnet : une ligne datée par écart ou imprévu (crée le
+dossier avec `mkdir -p ~/.village-ref` si besoin). Il est relu à la clôture (phase 6).
 
 **Cas particulier : l'utilisateur a déjà une application sur le Village** (créée avant le
 07/10/2026, ou par un collègue), et n'a pas besoin de la créer. Ne pas dérouler les phases 2
@@ -45,37 +125,40 @@ peut être périmée. La vérifier ou dire qu'elle date.
 
 ## Parler à quelqu'un qui n'est pas développeur
 
-Personne n'a à connaître ces mots. À chaque fois que tu en emploies un, ajoute une
-demi-phrase qui dit à quoi il sert, la première fois :
+**Mots à ne jamais écrire à l'utilisateur** : `Dockerfile`, alpine, tag, image, build,
+`CMD`, `healthz`, `readyz`, port, catalogue, `requirements`, conteneur, pod, IAP, ArgoCD,
+Conventional Commits. Ne les traduis pas : **dis autre chose**, ou ne dis rien.
 
-| Mot | Dis plutôt |
+| Au lieu de dire... | Dis |
 |---|---|
+| je prépare le `Dockerfile`, le tag, le build | je prépare la mise en ligne |
+| le build a échoué | la mise en ligne a échoué, je regarde pourquoi |
+| `healthz`, port, `CMD` | (rien : c'est ton affaire, pas la sienne) |
+| déployer | mettre en ligne |
 | terminal | la fenêtre où l'on tape des commandes |
 | dépôt (repository) | le dossier de ton application, conservé sur le Village |
 | cloner | en faire une copie sur ton ordinateur |
-| commit | enregistrer une version, avec un titre qui dit ce qui a changé |
-| push | envoyer tes changements sur le Village (c'est ce qui met l'application en ligne) |
-| build | la fabrication de l'application à partir de ton code |
-| déployer | mettre en ligne |
-| `Dockerfile` | la recette qui dit au Village comment fabriquer et lancer l'application |
-| logs | le journal que l'application écrit pendant qu'elle tourne |
-| SSH (clé) | un cadenas numérique qui remplace le mot de passe : tu gardes la clé privée, le Village garde la clé publique |
-| rebase | remettre ta copie à jour avant d'envoyer |
+| commit | enregistrer une version |
+| push | envoyer sur le Village (c'est ce qui met l'application en ligne) |
+| logs | le journal de l'application |
+| SSH (clé) | un cadenas numérique qui remplace le mot de passe |
 | vibeapp | une application hébergée sur le Village |
 | vibecoder | une personne autorisée à créer des applications sur le Village |
-| `main` | la version principale de ton application : seule elle est mise en ligne |
-| image | l'application fabriquée et emballée, prête à tourner |
-| badge | la pastille de couleur en haut du README (elle peut rester verte alors qu'un envoi a échoué) |
-| Wiz scan | le contrôle de sécurité automatique du code et de l'image |
-| CVE | l'identifiant d'une faille de sécurité connue |
-| SSO | la connexion unique avec ton compte Google Valiuz |
-| `#ask-village` | le canal Slack (la messagerie interne) de l'équipe du Village |
+| `main` | la version principale de ton application |
+| badge | la pastille du README (elle peut rester verte alors que l'envoi a échoué) |
+| Wiz scan | le contrôle de sécurité automatique |
+| SSO | la connexion avec ton compte Google Valiuz |
+| `#ask-village` | le canal Slack de l'équipe du Village |
 | cron | une tâche qui se lance toute seule à heure fixe |
-| Secret Manager | le coffre où l'on range les mots de passe et clés de l'application |
+| Secret Manager | le coffre où l'on range les mots de passe de l'application |
 
-N'écris jamais « Conventional Commits », « pod », « IAP », « ArgoCD » à l'utilisateur
-sans le traduire. Un titre de commit commence par `feat:` (nouveauté), `fix:`
-(correction), `docs:` (documentation) ou `chore:` (entretien).
+Un titre de commit commence par `feat:` (nouveauté), `fix:` (correction), `docs:`
+(documentation) ou `chore:` (entretien) : tu le rédiges seul.
+
+**Les commandes à taper par l'utilisateur** (clé SSH, connexion) : avant la commande, dis ce
+qui va s'afficher, **ce qu'il doit taper à chaque invite**, et à quoi ressemble le succès. Un
+terminal qui attend une réponse sans rien dire est incompréhensible pour un non-développeur. Si
+une saisie est invisible (mot de passe), dis-le.
 
 ---
 
@@ -137,30 +220,35 @@ n'a pas été prévu : le dire d'emblée et envoyer l'utilisateur vers `#ask-vil
 
 *Chaque commande a été exécutée séparément avec succès.*
 
-Avant de poser la moindre question, lis l'état, en lecture seule :
+Avant de poser la moindre question, lis l'état, en lecture seule. **Lance toi-même** ces
+contrôles, ne les fais pas copier à l'utilisateur. Cherche les clés **sans glob** : dans zsh,
+`ls ~/.ssh/*.pub` échoue avec `no matches found` quand il n'y a aucune clé, ce qui ressemble à
+une panne alors que c'est le cas normal d'un poste neuf.
 
 ```bash
 git --version
 ```
 
 ```bash
-ls ~/.ssh/*.pub
+ls ~/.ssh 2>/dev/null | grep '\.pub$' || echo "aucune clé"
 ```
 
 ```bash
 ssh -T git@gitea-village.valiuz.io
 ```
 
-Le nom de la clé n'a pas d'importance : c'est `ssh -T` qui dit si l'accès marche.
+Le nom de la clé n'a pas d'importance : c'est `ssh -T` qui dit si l'accès marche. Si
+l'utilisateur doit le lancer lui-même (VPN, première connexion), lui donner cette commande seule.
 
 | Réponse | Sens | Suite |
 |---|---|---|
 | `successfully authenticated` | Accès SSH en place | Phase 2 |
-| `Permission denied (publickey)` | Gitea ne connaît pas la clé | Aucune clé trouvée par `ls` : phase 1, étape 1.2. Une clé existe : étape 1.4 |
+| `aucune clé` (ou `no matches found`, ou `~/.ssh` absent) | Cas normal d'un poste neuf, **pas une erreur** | Phase 1, étape 1.2 |
+| `Permission denied (publickey)` | Gitea ne connaît pas la clé | Aucune clé trouvée : phase 1, étape 1.2. Une clé existe : étape 1.4 |
 | `Connection timed out` ou `reset by peer` | VPN absent | Demander de connecter Zscaler, retester |
 | `Host key verification failed` | L'empreinte du serveur a changé | **Stop** : ne rien accepter, demander sur `#ask-village` |
 
-Annonce à l'utilisateur ce qui est déjà fait et ce qui reste, en une courte liste.
+Affiche le bloc « Où on en est » de la **partie A**, avec ce qui est déjà fait.
 
 ---
 
@@ -190,24 +278,27 @@ Une clé remplace le mot de passe pour parler au Village. Elle se protège par u
 de passe que l'utilisateur tape **dans son terminal** : tu ne le vois jamais et ne
 le demandes jamais dans la conversation.
 
-Vérifier d'abord si une clé existe déjà, **quel que soit son nom** :
-
-```bash
-ls ~/.ssh/*.pub
-```
+La phase 0 a déjà dit si une clé existe, **quel que soit son nom**.
 
 Si `ssh -T` a répondu `successfully authenticated` en phase 0 : **ne pas en créer
 une autre**, passer à la phase 2. Si une clé existe mais n'est pas dans Gitea : la
 **réutiliser** (1.3, avec son nom de fichier). Ne jamais écraser une clé existante.
-Sinon :
+Sinon, **avant** de donner la commande, dire ceci (cas vécu : l'utilisateur ne sait pas que
+le terminal attend une réponse) :
+
+> « Le terminal va te poser 3 questions. Pour chacune, voici quoi faire :
+> 1. `Enter file in which to save the key` : appuie sur **Entrée**, sans rien taper.
+> 2. `Enter passphrase` : choisis un mot de passe, tape-le, puis Entrée. **Rien ne s'affiche
+>    pendant que tu tapes, c'est normal.** Range-le dans ton gestionnaire de mots de passe.
+> 3. `Enter same passphrase again` : retape le même mot de passe, puis Entrée.
+> C'est réussi quand tu vois `Your public key has been saved` et un petit dessin en carré. »
 
 ```bash
 ssh-keygen -t ed25519 -C "prenom.nom@valiuz.com"
 ```
 
-Dire : accepter le nom de fichier proposé (Entrée), puis choisir un mot de passe et le
-noter dans un gestionnaire de mots de passe. *(Le cas « aucune clé » n'a jamais été
-exécuté avec ce skill.)*
+*(Cas « aucune clé » exécuté une fois avec ce skill, le 19/10/2026, sur le poste d'un
+collègue : fluide une fois les invites annoncées.)*
 
 Mémoriser le mot de passe dans le trousseau du Mac, pour ne pas le retaper. *(Option
 acceptée par macOS ; que le mot de passe soit retenu entre deux sessions n'est pas
@@ -303,7 +394,9 @@ l'utilisateur ce que tu fais : tu te donnes de quoi lire la documentation offici
 
 ### 2.0 - Devenir « vibecoder » (si ce n'est pas déjà fait)
 
-*Lu dans le wiki et le code de la plateforme, jamais exécuté avec ce skill.*
+*Lu dans le wiki et le code de la plateforme. Le texte de la demande est écrit à partir d'une
+interview (ajoutée le 19/10/2026) ; l'approbation par l'équipe Village n'a pas encore été
+observée.*
 
 Seuls les **vibecoders** (les personnes autorisées à créer des applications) peuvent
 demander une application. Savoir s'il l'est : lui demander s'il a déjà une application
@@ -311,9 +404,28 @@ sur le Village ou s'il a déjà fait une demande « Join Village ». Si oui, pas
 Si non, ou en cas de doute, faire la demande ci-dessous (elle ne coûte rien). Si le
 formulaire de 2.1 est refusé ou absent, revenir ici.
 
+**Le texte de la demande est le seul contrôle humain du parcours** : un humain l'approuve
+d'après ce qu'il y lit. « Un outil pour mon équipe » ne suffit pas. **Ne laisse pas
+l'utilisateur l'écrire seul** : interviewe-le, **une question par message**, en langage simple :
+
+1. Quelle tâche ou quel problème veux-tu résoudre ? Qu'est-ce qui est pénible aujourd'hui ?
+2. Qui va l'utiliser, et combien de personnes environ (toi seul, ton équipe, tout Valiuz) ?
+3. Concrètement, que fait la personne dans l'outil, et qu'obtient-elle ?
+4. D'où viennent les données (saisies à la main, un Google Sheet, un fichier) ?
+5. Y a-t-il des données sensibles (RH, finance, clients) ?
+6. Est-ce que ça remplace un outil existant (Sheet, Apps Script) ?
+
+Si l'utilisateur a déjà un Apps Script à migrer, c'est le cas le plus fréquent : ces réponses
+resservent en partie C, **garde-les** dans `~/Projects/<nom>/` ou dans ta mémoire de session, ne les
+repose pas.
+
+Rédige toi-même **4 à 6 lignes** dans cet ordre : contexte et problème, utilisateurs, ce que fait
+l'outil, données utilisées, outil remplacé. N'invente rien qu'il n'a pas dit. Montre le texte, corrige
+avec lui, puis il le colle dans le formulaire.
+
 1. Ouvrir `https://gitea-village.valiuz.io/village/.profile/issues/new/choose`
 2. Choisir le modèle **Join Village**.
-3. Répondre à « What do you want to build? » : quelques lignes (pour qui, pour quoi).
+3. Répondre à « What do you want to build? » avec le texte rédigé ci-dessus.
 4. Valider, puis **attendre l'approbation** : une personne de l'équipe Village lit la
    demande et la valide. L'utilisateur voit la réponse en commentaire sur sa demande.
    Si rien ne bouge après un jour ouvré : `#ask-village` sur Slack (la messagerie
@@ -334,8 +446,13 @@ déployé : pas d'adresse, pas de pipeline. La seule voie est la demande « New 
 C'est **l'utilisateur** qui l'ouvre : il est le propriétaire, et tu n'as pas accès
 en écriture à cet endroit.
 
-**Avant de le laisser répondre**, lire avec lui la table « Avant le formulaire » de
-`references/village.md`, surtout : nom, base de données, Google, qui peut ouvrir.
+Affiche le bloc « Où on en est » de la **partie B** au moment où la demande « Join Village »
+est approuvée.
+
+**Décide à sa place** à partir de la table « Avant le formulaire » de `references/village.md` :
+propose un nom court, réponds Non au stockage et à la base de données, Oui à Google si l'Apps
+Script touche un Sheets (c'est presque toujours le cas). L'utilisateur ne tranche que : le nom,
+et qui peut ouvrir l'application. Dis-lui quoi cocher, formulaire ouvert devant lui.
 
 1. Ouvrir `https://gitea-village.valiuz.io/village/.profile/issues/new/choose`
 2. Choisir **New vibeapp**.
@@ -391,16 +508,16 @@ Ne **pas** réutiliser un dossier existant du même nom : le renommer en sauvega
 Lire `AGENTS.md` et `AGENTS-PERSO.md` du dépôt cloné : le premier est écrit par la
 plateforme (ne jamais le modifier), le second est à l'utilisateur.
 
-### 3.1b - Pas d'application sous la main ?
+### 3.1b - Le premier lien : une page « Bonjour »
 
-*Testé sur un Mac (la page et les deux contrôles répondent 200). Son déploiement sur le
-Village n'a pas été rejoué tel quel ; les mêmes cinq lignes de `Dockerfile` ont déployé
-une autre application le 02/10/2026.*
+*Testé sur un Mac (la page et les deux contrôles répondent 200). Déployé pour de vrai chez un
+collègue le 19/10/2026. Les mêmes cinq lignes de `Dockerfile` ont déployé une autre application
+le 02/10/2026.*
 
-Si la personne n'a pas encore de code, ne pas la laisser devant un `Dockerfile` vide.
-Lui proposer ce squelette : une page « Bonjour » qui respecte les trois règles de la
-plateforme (3.2). Une fois le dépôt cloné, créer `main.py` dans le dossier cloné, avec
-exactement ce contenu :
+Quel que soit l'objectif final (migration comprise), **le premier déploiement est toujours cette
+page « Bonjour »** : elle prouve que le circuit complet marche avant d'y mettre du vrai code.
+Une fois le dépôt cloné, **crée toi-même** `main.py` dans le dossier cloné, avec exactement ce
+contenu, sans demander d'accord ni présenter son contenu :
 
 ```python
 """Application de départ pour le Village : une page « Bonjour » qui respecte les trois règles de la plateforme."""
@@ -460,6 +577,10 @@ Ne pas construire de page de connexion : la plateforme garde déjà la porte.
 
 ### 3.3 - Le Dockerfile : quatre pièces qui doivent correspondre
 
+*Section pour toi seul. Tu décides et tu écris le `Dockerfile` sans le présenter, sans nommer le
+tag, sans demander d'accord. L'utilisateur n'en entend jamais parler : il apprend seulement
+« j'ai préparé la mise en ligne ».*
+
 Le `Dockerfile` fourni a **toutes ses lignes commentées** et ne construit pas tel quel.
 Il faut activer, pour **un seul** langage : le `FROM`, l'étape des dépendances,
 `COPY . .`, et le `CMD`. Oublier le `CMD` est l'erreur la plus coûteuse : le build
@@ -473,8 +594,10 @@ grep -E 'village/python` \| `[0-9.]+-alpine' ~/.village-ref/profile/image-catalo
 ```
 
 La commande ne garde que les tags complets (au 12/10/2026 : `3.14.8-alpine3.24` et
-`3.12.15-alpine3.24`). Prendre le plus récent, jamais `latest`, et le recouper avec la
-page `Base-images` du wiki.
+`3.12.15-alpine3.24`). Prendre le plus récent, jamais `latest`. **Le catalogue fait foi** : s'il
+diffère de la page `Base-images` du wiki ou du `Dockerfile` fourni (cas observé le 19/10 : le
+wiki citait `3.14.7`, retiré du catalogue, ce qui ferait échouer la fabrication), garder le
+catalogue, noter l'écart dans `~/.village-ref/notes-skill.md`, et ne pas en parler à l'utilisateur.
 Ne jamais tirer une image de Docker Hub : le build n'y a pas accès.
 
 Python (seul cas testé) ; remplacer `<tag>` par celui du catalogue :
@@ -505,27 +628,18 @@ Le `Dockerfile` fourni contient déjà ces lignes **en commentaire** : retirer l
 devant celles-ci et laisser les autres commentées. Ne pas toucher aux lignes d'un autre
 langage.
 
-### 3.4 - Tester sans Docker
+### 3.4 - Contrôle local (par toi, jamais par l'utilisateur)
 
-L'utilisateur n'a en général pas Docker, et ce n'est pas nécessaire pour déployer.
+**Le squelette « Bonjour » n'a pas de contrôle local** : son code est copié tel quel d'un
+exemple déjà testé, et la version de Python du poste de l'utilisateur n'a aucun rapport avec celle
+du Village. Passer directement à la phase 4. Ne **jamais** demander à l'utilisateur de lancer
+le serveur, d'ouvrir `127.0.0.1` ou d'arrêter avec Ctrl+C (cas vécu : il ne voyait pas l'intérêt).
 
-```bash
-python3 --version
-```
-
-Si macOS propose d'installer des outils : accepter, attendre, relancer. Sinon, lancer
-le serveur **dans le dossier de l'application** :
-
-```bash
-PORT=8097 python3 -u main.py
-```
-
-Ouvrir `http://127.0.0.1:8097/`, puis `/healthz` et `/readyz` : les trois pages doivent
-répondre (« Bonjour », puis « ok » deux fois). Arrêter avec Ctrl+C.
-Limite à dire : le `Dockerfile` ne sera validé qu'au premier build sur le Village, et
-une base de données n'est pas joignable depuis le poste. **Ne jamais répéter** la phrase du
-wiki « si ça répond en local, ça répondra une fois déployé » : ce test ne prouve que le
-démarrage, ni le `Dockerfile`, ni l'accès Google, ni la base.
+**Pour le code réécrit en partie C**, c'est toi qui le contrôles : démarrer le serveur en arrière-plan
+(`PORT=8097 python3 -u main.py`), appeler `/`, `/healthz` et `/readyz` avec `curl`, l'arrêter,
+et ne rapporter que le résultat (« j'ai vérifié que la page s'affiche »). Le serveur de jetons Google
+n'existe que sur le Village : en local, on ne vérifie que le démarrage. **Ne jamais répéter** la
+phrase du wiki « si ça répond en local, ça répondra une fois déployé ».
 
 ---
 
@@ -533,10 +647,19 @@ démarrage, ni le `Dockerfile`, ni l'accès Google, ni la base.
 
 *Testée.*
 
-1. Montrer ce qui va partir (`git status`, `git diff --stat`), puis **demander l'accord**.
+1. Contrôler ce qui va partir (`git status`, `git diff --stat`) **toi-même**, sans le présenter
+   en détail. Dire seulement : « Tout est prêt. Je peux mettre ta page en ligne : ok ? »
+   C'est **le seul accord demandé** de toute la partie B. Attendre « ok ».
 2. Enregistrer la version avec un titre qui dit ce qui change et commence par
-   `feat:`, `fix:`, `docs:` ou `chore:`.
+   `feat:`, `fix:`, `docs:` ou `chore:` (tu le rédiges seul).
 3. Envoyer sur `main` : seul `main` met en ligne.
+4. Pendant l'attente (2 à 7 minutes), ne rien raconter de technique : « C'est en cours, ça prend
+   quelques minutes. » Surveiller l'historique toi-même (section suivante), sans demander à
+   l'utilisateur de lancer `git fetch`.
+5. Quand `ci: deploy` est apparu et que l'adresse répond, donner le lien et demander **une seule
+   chose** : « Ouvre ce lien. Tu vois "Bonjour, ça marche" ? Réponds ok. » À son **« ok »**, la
+   partie B est terminée : une ligne de clôture, le bloc de la **partie C**, et enchaîner
+   directement (pas de bilan, pas de liste de ce qui n'est pas connecté).
 
 ### Si l'envoi est refusé (`rejected`, `fetch first`)
 
@@ -626,6 +749,58 @@ une connexion Google : c'est normal.
 
 ---
 
+## PHASE C - Migrer l'Apps Script (partie C)
+
+*Jamais exécutée. Écrite le 19/10/2026 à partir de la demande de Jonas. **Écriture dans un Sheets :
+non prouvée sur le Village** (test prévu par Jonas sur `calendrier-edito`).* Le détail (inventaire,
+équivalences Apps Script vers Python, pièges) est dans **`references/migration-gas.md` : le lire en
+entrant dans cette phase**, pas avant.
+
+Le Village n'accepte que Python, Node.js et Go : un Apps Script se **réécrit**, il ne se déplace
+pas. Ne présente jamais la migration comme automatique ni garantie.
+
+Déroulé, sans pause entre les étapes :
+
+1. **Où est le script.** Une seule question : « Dans quel dossier de ton Mac se trouve ton Apps
+   Script ? » (en général, il est déjà sur son ordinateur, pas seulement dans l'éditeur Google).
+   Tu lis toi-même tous les `.gs`, `.html` et `appsscript.json`. Si le dossier est hors du
+   dossier de l'application et que l'agent demande une permission, **copie-le** dans
+   `source-gas/` à l'intérieur de l'application. Ce dossier **ne doit jamais partir sur le
+   Village** (identifiants ou adresses en dur possibles) : ajoute `source-gas/` à `.gitignore`
+   **et** à `.dockerignore` avant tout envoi, puis vérifie avec `git status` qu'il n'apparaît pas.
+2. **Cinq questions métier**, une par message, sans jargon (saute celles dont tu as déjà la
+   réponse grâce à l'interview de la phase 2.0) : que fait l'application en une phrase ; qui
+   l'utilise et comment ; quels Google Sheets (liens) et si elle y lit ou y écrit ; envoie-t-elle
+   des mails ou tourne-t-elle seule à heure fixe ; qui doit pouvoir ouvrir la nouvelle version.
+   Tout le reste (verrous, propriétés, déclencheurs, pages HTML), **tu le lis dans le code**, tu ne
+   le demandes jamais.
+3. **Inventaire silencieux** puis **résumé de 5 lignes en termes métier** : ce qui sera identique,
+   ce qui change pour les utilisateurs, ce qui **ne peut pas migrer** et par quoi tu le remplaces
+   (voir `references/migration-gas.md`). Le choix du langage est le tien (Python par défaut).
+   Pas d'accord demandé sur le résumé : l'utilisateur corrige s'il veut.
+4. **Réécrire toute l'application** dans le dossier cloné, contrôler en local (3.4), mettre à jour
+   `Dockerfile` et dépendances, sans rien présenter de technique.
+5. **Première mise en ligne sur une copie du Sheets** : tant que l'écriture n'est pas prouvée
+   (`references/village.md`), l'application ne touche jamais le Sheets d'origine. Demande à
+   l'utilisateur de faire « Fichier > Créer une copie » dans Google Sheets et de te donner le lien de
+   la copie, puis de la partager avec l'adresse de l'application (tu lui donnes l'adresse et tu lui
+   dis où cliquer). L'Apps Script d'origine continue de tourner pendant ce temps. **Accord** avant
+   le `git push`, comme en partie B.
+6. **Validation par l'utilisateur** : il ouvre le lien et essaie ce qu'il fait d'habitude (une
+   question à la fois : « Ajoute une ligne comme d'habitude. Elle apparaît dans la copie ? »).
+7. **Bascule** : seulement après son « ok », reprendre l'identifiant du Sheets d'origine dans
+   l'application, **avec son accord explicite** (ça touche aux vraies données), puis remettre en
+   ligne. L'Apps Script d'origine n'est **ni supprimé ni désactivé** par toi : c'est à l'utilisateur
+   de le faire, plus tard, quand il est serein. Le lui dire en une phrase.
+
+Si l'utilisateur refuse de travailler sur une copie (« ça doit rester la prod »), respecte-le et
+applique les garde-fous de la section « Si l'application doit écrire dans le Sheets » de
+`references/village.md`.
+
+À la fin : le bloc de clôture (adresse, ce qui a migré, ce qui reste), puis la phase 6.
+
+---
+
 ## PHASE 5 - Autoriser d'autres personnes
 
 *Lue dans le wiki et les formulaires ; non exécutée de bout en bout.*
@@ -661,7 +836,9 @@ n'apparaît pas : `#ask-village`.
 ## PHASE 6 - Clôture
 
 Résumer en peu de lignes : l'adresse, le dépôt, ce qui a été fait, ce qui reste
-(personnes à ajouter, suites), et rappeler :
+(personnes à ajouter, suites). **Si `~/.village-ref/notes-skill.md` contient des lignes**, en
+donner un résumé en 3 lignes maximum et demander à l'utilisateur de les envoyer à Jonas (amélioration
+du skill). Rappeler aussi :
 - les logs sont lisibles dans le navigateur (lien du commentaire de la phase 2) ;
 - tout changement envoyé sur `main` remet l'application à jour ;
 - lire les logs depuis le terminal : **proposer la phase 7 seulement si besoin**.
@@ -786,9 +963,15 @@ arrêtée avant d'écrire : vérifier le `CMD` du `Dockerfile` en premier.
 
 ## Limites connues de ce skill
 
-- Trois applications l'ont éprouvé, déployées par la même personne (le concepteur).
-  **Un non-développeur ne l'a pas encore parcouru** : c'est le test qui compte. Noter
-  chaque hésitation de la personne, avec l'étape et la phrase exacte qui a bloqué.
+- Trois applications l'ont éprouvé, déployées par le concepteur, puis une quatrième par un
+  collègue non développeur (Guillaume, 19/10/2026) jusqu'au premier lien. **La partie C
+  (migration) n'a jamais été exécutée.** Noter chaque hésitation de la personne, avec l'étape
+  et la phrase exacte qui a bloqué.
+- **Retours de Guillaume (19/10/2026), déjà intégrés :** `ls ~/.ssh/*.pub` échoue dans zsh sans clé ;
+  invites de `ssh-keygen` obscures ; texte du Join Village trop vague ; trop de détails techniques
+  (Dockerfile, alpine) ; tests locaux demandés sans raison ; trop de texte et de « non connecté »
+  après le succès ; objectif réel = migrer un Apps Script. Axe de progrès majeur selon Jonas :
+  **concision et enchaînement plus rapide**.
 - **Premier retour réel (12/10/2026) :** une collègue a suivi des prompts tirés de ce skill sur
   une application créée le 05/10 (Node.js). Constats : sa clé SSH était refusée (`Permission
   denied`), son agent était en mode lecture seule et a refusé le `git pull`, et elle a conclu
@@ -799,9 +982,11 @@ arrêtée avant d'écrire : vérifier le `CMD` du `Dockerfile` en premier.
   « plan »), le dire et demander à l'utilisateur de passer à l'agent « build » : la documentation
   d'OpenCode indique que la touche Tab fait défiler les agents principaux. À défaut, il copie
   lui-même les commandes dans son Terminal, une par une.
-- Phase 2.0 (Join Village), ajout d'un collaborateur, cas « aucune clé SSH » : jamais
-  exécutés avec ce skill.
-- Le squelette de 3.1b : testé sur un Mac, déploiement sur le Village non rejoué tel quel.
+- Phase 2.0 (Join Village) : l'interview n'a pas encore été vue en usage réel, ni l'approbation
+  par l'équipe Village. Ajout d'un collaborateur : jamais exécuté avec ce skill.
+- Cas « aucune clé SSH » : exécuté une fois (19/10/2026), les invites de `ssh-keygen` sont
+  maintenant annoncées.
+- Le squelette de 3.1b : déployé chez Guillaume le 19/10/2026.
 - Le wiki est protégé par une connexion Google dans le navigateur, mais lisible par
   `git clone` en SSH une fois la clé en place : c'est ce que fait la phase 1.6.
 - Les libellés des pages Gitea sont décrits de mémoire : ils peuvent différer.
