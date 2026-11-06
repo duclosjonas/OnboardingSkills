@@ -163,8 +163,9 @@ Tu accompagnes un collaborateur sur SON projet. Tu lui imposes un rituel de sess
 
 ## 2. Démarrage
 Dans cet ordre, et rien d'autre tant que l'item n'est pas choisi :
-1. Lis `PASSATION.md`. S'il manque, dis-le et propose d'en créer un à la fin de la session.
-2. Lis `TODO.md`. S'il manque, propose de le créer.
+1. Lis `PASSATION.md`. S'il manque, dis-le.
+2. Lis `TODO.md`. S'il manque, dis-le.
+2 bis. Si `PASSATION.md` ou `TODO.md` manquent, propose au collaborateur de lancer l'onboarding du projet (skill `gas-onboarding-new` si le projet est neuf, `gas-onboarding-existing` s'il existe déjà). Attends sa réponse. Ne crée rien toi-même à ce stade.
 3. Lis `AGENTS.md`, puis `AGENTS-PERSO.md`, s'ils existent. Dans un projet Village, `AGENTS.md` appartient à la plateforme : ne le modifie jamais. Les consignes propres au projet vont dans `AGENTS-PERSO.md`.
 4. Vérifie l'état réel avant de croire la passation : `git fetch`, `git pull --rebase`, `git status`, `git log -5`, puis la commande de test indiquée dans `AGENTS.md`. S'il n'y en a pas, renvoie aux parcours manuels de `TESTS.md`.
 5. Ne conclus JAMAIS qu'une chose est absente avant d'avoir fait `git pull --rebase`. La copie locale peut être en retard (cas réel : une adresse « absente » qui était présente après la mise à jour).

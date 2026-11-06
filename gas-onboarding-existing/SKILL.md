@@ -19,7 +19,7 @@ Tu ne génères aucune ligne de logique métier. Tu audites et tu documentes.
 - Ne générer aucun fichier avant validation explicite de l'étape précédente
 - Ne jamais écraser un fichier existant sans confirmation
 - **NE JAMAIS créer, modifier ou corriger du code pendant l'onboarding** — chaque problème détecté va dans TODO.md, point final. Même si le fix semble trivial. Même si l'utilisateur demande de le faire maintenant. La réponse est toujours : "Je note ça dans TODO.md — on traitera ça en session de travail."
-- **L'ordre des phases est obligatoire** : audit → AGENTS.md → TODO.md → TESTS.md → CHANGELOG.md. Ne pas sauter ni fusionner des phases.
+- **L'ordre des phases est obligatoire** : audit → AGENTS.md → TODO.md → TESTS.md → CHANGELOG.md → PASSATION.md. Ne pas sauter ni fusionner des phases.
 
 ---
 
@@ -384,7 +384,7 @@ Pour chaque parcours (T1 partiellement pré-rempli depuis Q3b/Q3c) :
 
 ---
 
-## PHASE 6 — GÉNÉRATION DE CHANGELOG.md
+## PHASE 6 — GÉNÉRATION DE CHANGELOG.md ET PASSATION.md
 
 ```markdown
 # [NOM DU PROJET] — Changelog
@@ -431,7 +431,8 @@ Fichiers de gouvernance générés :
 ├── AGENTS.md       → architecture + conventions + SESSION PROTOCOL
 ├── TODO.md         → [X] items ([Y] crashes, [Z] bugs, [W] dette)
 ├── TESTS.md        → T1 à T[N] définis
-└── CHANGELOG.md    → structure prête
+├── CHANGELOG.md    → structure prête
+├── PASSATION.md    → état initial, prochain item
 
 Skills disponibles globalement :
 ├── gas-reviewer          → checklist avant chaque push
