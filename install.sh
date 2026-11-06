@@ -30,16 +30,11 @@ SKILLS_DIR="$HOME/.config/opencode/skills"
 SKILLS=(
   "collaborator-onboarding"
   "first-session-starter"
-  "session-starter"
-  "gas-onboarding-welcome"
   "gas-onboarding-existing"
   "gas-onboarding-new"
   "gas-reviewer"
   "gas-impact-analyzer"
   "gas-regression-checker"
-  "gas-setup-node-clasp"
-  "gas-setup-node-clasp-off"
-  "gas-project-handoff"
 )
 
 echo ""

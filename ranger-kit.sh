@@ -2,7 +2,7 @@
 # ranger-kit.sh — range le kit OnboardingSkills aux bons endroits de OpenCode.
 # À lancer depuis le dossier du kit (celui qui contient ce fichier).
 # Agents   -> ~/.config/opencode/agents/
-# Skills   -> ~/.config/opencode/skills/   (tout dossier à la racine avec un SKILL.md)
+# Skills   -> ~/.config/opencode/skills/   (liste explicite ci-dessous, rien de plus)
 # Rien n'est supprimé. Un fichier existant est remplacé seulement s'il vient du kit.
 # AGENTS_DIR et SKILLS_DIR peuvent être surchargés (tests).
 
@@ -27,14 +27,13 @@ for a in "${AGENTS[@]}"; do
   fi
 done
 
-SKILL_DIRS=()
-for d in "$KIT"/*/; do
-  [ -f "$d/SKILL.md" ] && SKILL_DIRS+=("$(basename "$d")")
+SKILL_DIRS=("collaborator-onboarding" "first-session-starter" "gas-onboarding-existing" "gas-onboarding-new" "gas-reviewer" "gas-impact-analyzer" "gas-regression-checker" "village-first-deploy")
+for s in "${SKILL_DIRS[@]}"; do
+  if [ ! -s "$KIT/$s/SKILL.md" ]; then
+    echo "❌ Le skill $s est absent du kit. Rien n'a été rangé."
+    exit 1
+  fi
 done
-if [ "${#SKILL_DIRS[@]}" -eq 0 ]; then
-  echo "❌ Aucun skill trouvé dans le kit. Rien n'a été rangé."
-  exit 1
-fi
 
 # 2. Rangement des agents
 mkdir -p "$AGENTS_DIR"

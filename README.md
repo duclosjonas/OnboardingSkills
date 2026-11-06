@@ -55,7 +55,7 @@ bash ~/Documents/OnboardingSkills-main/ranger-kit.sh
 Montre-moi le résultat (agents et skills rangés), puis dis-moi si quelque chose a échoué.
 ```
 
-L'IA lance le script : il copie les 3 agents (`compagnon-projet`, `executant-simple`, `executant-code`) dans `~/.config/opencode/agents/` et les skills dans `~/.config/opencode/skills/`. Il ne supprime rien. Relancer le prompt met simplement tout à jour.
+L'IA lance le script : il copie 3 agents (`compagnon-projet`, `executant-simple`, `executant-code`) dans `~/.config/opencode/agents/` et 8 skills dans `~/.config/opencode/skills/` : `collaborator-onboarding`, `first-session-starter`, `gas-onboarding-existing`, `gas-onboarding-new`, `gas-reviewer`, `gas-impact-analyzer`, `gas-regression-checker`, `village-first-deploy`. Il ne touche à rien d'autre.
 
 Ensuite : ferme et rouvre OpenCode, puis choisis `compagnon-projet` avec la touche Tab.
 
