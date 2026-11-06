@@ -41,6 +41,18 @@ C'est tout. Le script installe les skills au bon endroit automatiquement.
 
 ---
 
+## Agents (compagnon de projet)
+
+Trois agents OpenCode : `compagnon-projet` (l'agent principal, qui tient ta session : passation, liste de tâches, clôture) et ses deux exécutants `executant-simple` et `executant-code`, qu'il lance pour les tâches précises.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/duclosjonas/OnboardingSkills/main/install-agents.sh | bash
+```
+
+Ils sont installés dans `~/.config/opencode/agents/`, donc disponibles sur tous tes projets. Ensuite : ferme et rouvre OpenCode (ou tape `/reload`), puis choisis `compagnon-projet` avec la touche Tab.
+
+---
+
 ## Démarrage
 
 Une fois l'installation terminée, ouvre OpenCode et tape le prompt correspondant à ton profil :
