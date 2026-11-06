@@ -55,8 +55,8 @@ OpenCode te permet de choisir le modèle que l'agent utilise. Chaque modèle a u
 
 ---
 
-## Le mode Plan
+## Ton compagnon de projet
 
-OpenCode est configuré en mode Plan par défaut. Cela signifie que l'agent te montre ce qu'il s'apprête à faire avant de le faire — et attend ta validation.
+Ton agent par défaut est le compagnon de projet. À chaque nouvelle session, il lit où tu en étais et te demande sur quoi tu avances. Il te montre ce qu'il s'apprête à faire avant les actions importantes — et attend ta validation.
 
 C'est intentionnel. Ne cherche pas à le désactiver.

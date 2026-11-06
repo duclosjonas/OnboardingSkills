@@ -4,13 +4,16 @@
 # Agents   -> ~/.config/opencode/agents/
 # Skills   -> ~/.config/opencode/skills/   (liste explicite ci-dessous, rien de plus)
 # Rien n'est supprimé. Un fichier existant est remplacé seulement s'il vient du kit.
-# AGENTS_DIR et SKILLS_DIR peuvent être surchargés (tests).
+# Il fait aussi de compagnon-projet l'agent par défaut : il est là à chaque nouvelle session,
+# sans rien choisir. Ancienne config sauvegardée en opencode.json.avant-compagnon.
+# AGENTS_DIR, SKILLS_DIR et CONFIG_FILE peuvent être surchargés (tests).
 
 set -e
 
 KIT="$(cd "$(dirname "$0")" && pwd)"
 AGENTS_DIR="${AGENTS_DIR:-$HOME/.config/opencode/agents}"
 SKILLS_DIR="${SKILLS_DIR:-$HOME/.config/opencode/skills}"
+CONFIG_FILE="${CONFIG_FILE:-$HOME/.config/opencode/opencode.json}"
 AGENTS=("compagnon-projet" "executant-simple" "executant-code")
 
 echo ""
@@ -55,7 +58,37 @@ for s in "${SKILL_DIRS[@]}"; do
   echo "✅ skill $s rangé"
 done
 
+# 4. Agent par défaut : compagnon-projet (la config existante est sauvegardée, rien d'autre n'est changé)
+mkdir -p "$(dirname "$CONFIG_FILE")"
+[ -f "$CONFIG_FILE" ] && [ ! -f "$CONFIG_FILE.avant-compagnon" ] && cp "$CONFIG_FILE" "$CONFIG_FILE.avant-compagnon"
+export CONFIG_FILE
+if command -v node >/dev/null 2>&1; then
+  RESULT="$(node -e "
+const fs=require('fs');const p=process.env.CONFIG_FILE;
+let c={};
+if(fs.existsSync(p)){c=JSON.parse(fs.readFileSync(p,'utf8'));}
+c.default_agent='compagnon-projet';
+fs.writeFileSync(p,JSON.stringify(c,null,2)+'\\n');
+console.log('ok');" 2>&1)" || RESULT="erreur"
+elif command -v python3 >/dev/null 2>&1; then
+  RESULT="$(python3 -c "
+import json,os
+p=os.environ['CONFIG_FILE']
+c=json.load(open(p,encoding='utf-8')) if os.path.exists(p) else {}
+c['default_agent']='compagnon-projet'
+open(p,'w',encoding='utf-8').write(json.dumps(c,indent=2,ensure_ascii=False)+'\\n')
+print('ok')" 2>&1)" || RESULT="erreur"
+else
+  RESULT="erreur"
+fi
+if [ "$RESULT" = "ok" ]; then
+  echo "✅ compagnon-projet est maintenant l'agent par défaut"
+else
+  echo "⚠️  Agent par défaut non modifié (ton fichier opencode.json n'a pas pu être lu)."
+  echo "   Les agents et skills sont bien rangés. Dis-le à la personne qui t'a donné le kit."
+fi
+
 echo ""
 echo "=== Rangement terminé : ${#AGENTS[@]} agents, ${#SKILL_DIRS[@]} skills ==="
-echo "Prochaine étape : ferme et rouvre OpenCode, puis choisis « compagnon-projet » (touche Tab)."
+echo "Prochaine étape : ferme et rouvre OpenCode. compagnon-projet sera là dès la prochaine session."
 echo ""

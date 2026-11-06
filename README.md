@@ -57,7 +57,7 @@ Montre-moi le résultat (agents et skills rangés), puis dis-moi si quelque chos
 
 L'IA lance le script : il copie 3 agents (`compagnon-projet`, `executant-simple`, `executant-code`) dans `~/.config/opencode/agents/` et 8 skills dans `~/.config/opencode/skills/` : `collaborator-onboarding`, `first-session-starter`, `gas-onboarding-existing`, `gas-onboarding-new`, `gas-reviewer`, `gas-impact-analyzer`, `gas-regression-checker`, `village-first-deploy`. Il ne touche à rien d'autre.
 
-Ensuite : ferme et rouvre OpenCode, puis choisis `compagnon-projet` avec la touche Tab.
+Ensuite : ferme et rouvre OpenCode. `compagnon-projet` démarre tout seul à chaque session, il n'y a rien à choisir.
 
 ---
 
@@ -111,7 +111,7 @@ Selon tes réponses, il choisit le bon chemin :
 
 **Autre technologie** — l'agent génère un fichier de gouvernance minimal adapté à ta stack.
 
-> Pas d'installation clasp dans ce parcours — le sujet n'a pas encore avancé côté équipe. Les projets GAS fonctionnent en copier-coller vers l'éditeur Apps Script en ligne (script.google.com).
+> Les projets Google Apps Script fonctionnent en copier-coller vers l'éditeur Apps Script en ligne (script.google.com). Aucun outil à installer.
 
 ---
 

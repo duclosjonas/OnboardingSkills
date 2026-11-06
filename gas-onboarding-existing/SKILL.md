@@ -27,12 +27,10 @@ Tu ne génères aucune ligne de logique métier. Tu audites et tu documentes.
 
 Avant de commencer, vérifier si les fichiers .gs sont déjà en local.
 
-**Si oui (via `clasp pull` ou copier-coller déjà fait) :** passer directement à la Phase 1.
+**Si oui (copier-coller déjà fait) :** passer directement à la Phase 1.
 
 **Si non (uniquement dans Apps Script en ligne) :**
-> "Avant l'audit, tu as deux options pour récupérer tes fichiers en local :
-> - **Option 1 — clasp :** si tu as clasp configuré, lance `clasp pull` depuis ton dossier projet. Dis-moi quand c'est fait.
-> - **Option 2 — copier-coller :** dans Apps Script, pour chaque fichier .gs : clique sur les 3 points → Afficher → sélectionne tout (Cmd+A) → copie (Cmd+C). Crée le fichier correspondant dans `~/Projects/[nom-projet]/` et colle le contenu. Dis-moi quand c'est fait."
+> "Avant l'audit, il faut récupérer tes fichiers en local. Copier-coller : dans Apps Script, pour chaque fichier .gs : clique sur les 3 points → Afficher → sélectionne tout (Cmd+A) → copie (Cmd+C). Crée le fichier correspondant dans `~/Projects/[nom-projet]/` et colle le contenu. Dis-moi quand c'est fait."
 
 Attendre confirmation avant de passer à la Phase 1.
 

@@ -1,6 +1,6 @@
 ---
 name: collaborator-onboarding
-description: Use when a new collaborator starts with OpenCode. Guides through 3 phases in order: work profile interview (generates ~/.config/opencode/AGENTS.md), project setup (existing or new, GAS or other stack — copy-paste workflow, no clasp), and security skills installation (gas-reviewer, gas-impact-analyzer, gas-regression-checker).
+description: Use when a new collaborator starts with OpenCode. Guides through 3 phases in order: work profile interview (generates ~/.config/opencode/AGENTS.md), project setup (existing or new, GAS or other stack — copy-paste workflow), and security skills installation (gas-reviewer, gas-impact-analyzer, gas-regression-checker).
 ---
 
 # Skill — Collaborator Onboarding
@@ -9,7 +9,7 @@ description: Use when a new collaborator starts with OpenCode. Guides through 3 
 Skill d'onboarding complet pour un nouveau collaborateur OpenCode.
 Enchaîne 3 phases dans l'ordre : profil de travail → configuration projet → installation des skills de sécurisation.
 
-> Pas d'installation clasp dans ce parcours — le sujet clasp n'a pas encore avancé côté équipe. Les projets GAS fonctionnent en copier-coller vers l'éditeur Apps Script en ligne (script.google.com).
+> Les projets Google Apps Script fonctionnent en copier-coller vers l'éditeur Apps Script en ligne (script.google.com). Aucun outil à installer.
 
 À exécuter une seule fois, en début de collaboration.
 
@@ -110,19 +110,19 @@ first_session: true
 Affiche le fichier généré et demande confirmation avant d'écrire.
 Si le fichier `~/.config/opencode/AGENTS.md` existe déjà, le signaler et demander s'il faut écraser ou fusionner.
 
-Après confirmation et écriture du fichier, activer le mode Plan par défaut :
+Après confirmation et écriture du fichier, définir `compagnon-projet` comme agent par défaut (si l'agent n'est pas installé, utiliser `plan`) :
 
 ```bash
 mkdir -p ~/.config/opencode && node -e "
 const fs = require('fs');
 const path = '${HOME}/.config/opencode/opencode.json';
 const config = fs.existsSync(path) ? JSON.parse(fs.readFileSync(path, 'utf8')) : {};
-config.default_agent = 'plan';
+config.default_agent = fs.existsSync(process.env.HOME + '/.config/opencode/agents/compagnon-projet.md') ? 'compagnon-projet' : 'plan';
 fs.writeFileSync(path, JSON.stringify(config, null, 2));
 "
 ```
 
-Confirmer : "Le mode Plan est activé par défaut — tu devras valider chaque action avant qu'elle soit exécutée."
+Confirmer : "Ton compagnon de projet est là à chaque nouvelle session : il te dit où tu en étais et te demande sur quoi tu avances. Il te demande ton accord avant chaque action importante."
 
 ---
 
@@ -223,7 +223,7 @@ Ton environnement est prêt.
 ✅ Ton profil de travail est configuré — l'agent connaît tes préférences sur tous tes projets
 ✅ Ton projet est configuré — l'agent connaît son architecture et ses règles
 ✅ Les outils de sécurité sont connectés — l'agent vérifie le code avant chaque modification importante
-✅ Mode Plan activé — tu valides chaque action avant qu'elle soit exécutée
+✅ Ton compagnon de projet démarre à chaque session — il te demande ton accord avant chaque action importante
 
 Avant ta première session de travail, lis ce guide (2 minutes) :
 → https://github.com/duclosjonas/OnboardingSkills/blob/main/OPENCODE_GUIDE.md
