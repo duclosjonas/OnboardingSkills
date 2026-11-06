@@ -41,15 +41,23 @@ C'est tout. Le script installe les skills au bon endroit automatiquement.
 
 ---
 
-## Agents (compagnon de projet)
+## Agents et skills : installation en 3 étapes
 
-Trois agents OpenCode : `compagnon-projet` (l'agent principal, qui tient ta session : passation, liste de tâches, clôture) et ses deux exécutants `executant-simple` et `executant-code`, qu'il lance pour les tâches précises.
+Le dossier où OpenCode range ses agents et ses skills est caché : tu n'as pas besoin de l'ouvrir. Le kit se pose dans un dossier visible, et l'IA range les fichiers.
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/duclosjonas/OnboardingSkills/main/install-agents.sh | bash
+1. **Télécharge le kit** : ouvre https://github.com/duclosjonas/OnboardingSkills/archive/refs/heads/main.zip (le fichier se télécharge dans Téléchargements), puis double-clique dessus pour le décompresser.
+2. **Déplace le dossier** `OnboardingSkills-main` dans `Documents`.
+3. **Ouvre OpenCode** (dans n'importe quel dossier) et colle ce prompt tel quel :
+
+```
+Range le kit OpenCode que j'ai mis dans mes Documents. Lance la commande
+bash ~/Documents/OnboardingSkills-main/ranger-kit.sh
+Montre-moi le résultat (agents et skills rangés), puis dis-moi si quelque chose a échoué.
 ```
 
-Ils sont installés dans `~/.config/opencode/agents/`, donc disponibles sur tous tes projets. Ensuite : ferme et rouvre OpenCode (ou tape `/reload`), puis choisis `compagnon-projet` avec la touche Tab.
+L'IA lance le script : il copie les 3 agents (`compagnon-projet`, `executant-simple`, `executant-code`) dans `~/.config/opencode/agents/` et les skills dans `~/.config/opencode/skills/`. Il ne supprime rien. Relancer le prompt met simplement tout à jour.
+
+Ensuite : ferme et rouvre OpenCode, puis choisis `compagnon-projet` avec la touche Tab.
 
 ---
 
