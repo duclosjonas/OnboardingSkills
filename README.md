@@ -41,6 +41,26 @@ C'est tout. Le script installe les skills au bon endroit automatiquement.
 
 ---
 
+## Agents et skills : installation en 3 étapes
+
+Le dossier où OpenCode range ses agents et ses skills est caché : tu n'as pas besoin de l'ouvrir. Le kit se pose dans un dossier visible, et l'IA range les fichiers.
+
+1. **Télécharge le kit** : ouvre https://github.com/duclosjonas/OnboardingSkills/archive/refs/heads/main.zip (le fichier se télécharge dans Téléchargements), puis double-clique dessus pour le décompresser.
+2. **Déplace le dossier** `OnboardingSkills-main` dans `Documents`.
+3. **Ouvre OpenCode** (dans n'importe quel dossier) et colle ce prompt tel quel :
+
+```
+Range le kit OpenCode que j'ai mis dans mes Documents. Lance la commande
+bash ~/Documents/OnboardingSkills-main/ranger-kit.sh
+Montre-moi le résultat (agents et skills rangés), puis dis-moi si quelque chose a échoué.
+```
+
+L'IA lance le script : il copie 3 agents (`compagnon-projet`, `executant-simple`, `executant-code`) dans `~/.config/opencode/agents/` et 8 skills dans `~/.config/opencode/skills/` : `collaborator-onboarding`, `first-session-starter`, `gas-onboarding-existing`, `gas-onboarding-new`, `gas-reviewer`, `gas-impact-analyzer`, `gas-regression-checker`, `village-first-deploy`. Il ne touche à rien d'autre.
+
+Ensuite : ferme et rouvre OpenCode. `compagnon-projet` démarre tout seul à chaque session, il n'y a rien à choisir.
+
+---
+
 ## Démarrage
 
 Une fois l'installation terminée, ouvre OpenCode et tape le prompt correspondant à ton profil :
@@ -91,7 +111,7 @@ Selon tes réponses, il choisit le bon chemin :
 
 **Autre technologie** — l'agent génère un fichier de gouvernance minimal adapté à ta stack.
 
-> Pas d'installation clasp dans ce parcours — le sujet n'a pas encore avancé côté équipe. Les projets GAS fonctionnent en copier-coller vers l'éditeur Apps Script en ligne (script.google.com).
+> Les projets Google Apps Script fonctionnent en copier-coller vers l'éditeur Apps Script en ligne (script.google.com). Aucun outil à installer.
 
 ---
 
