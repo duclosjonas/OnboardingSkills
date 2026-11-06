@@ -89,6 +89,7 @@ Créer la structure suivante dans `~/Projects/<nom-projet>/` :
 ├── TODO.md
 ├── TESTS.md
 ├── CHANGELOG.md
+├── PASSATION.md
 ├── .opencode/
 └── src/
     └── 00_Config.gs
@@ -420,6 +421,22 @@ Registre unique des travaux à réaliser.
 ```
 
 ---
+
+### 2.6 — `PASSATION.md`
+
+```markdown
+# PASSATION — [NOM DU PROJET] — [DATE]
+## État vérifié (preuve datée)
+- Projet initialisé : fichiers de gouvernance créés
+## Non vérifié
+- Rien pour l'instant
+## Prochain item
+Premier item de TODO.md
+## Décisions en attente
+- Aucune
+## Prompt d'ouverture de la session suivante
+Lis PASSATION.md puis TODO.md, puis reprends au prochain item.
+```
 
 ### 2.5 — `CHANGELOG.md`
 
